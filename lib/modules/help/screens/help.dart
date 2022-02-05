@@ -145,16 +145,13 @@ class HelpScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: Countdown(
-              builder: (context, duration) {
-                final h = duration.inHours;
-                final m = duration.inMinutes % 60;
-                final s = duration.inSeconds % 60;
+              builder: (context, string) {
                 return RichText(
                   text: TextSpan(
                     style: richTextStyle,
                     children: [
                       TextSpan(
-                        text: '(#${getCurrentDay() + 2}) $h : $m : $s',
+                        text: '(#${getCurrentDay() + 2}) $string',
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -172,8 +169,10 @@ class HelpScreen extends StatelessWidget {
               var info = '...';
               final package = snapshot.data;
               if (package != null) {
-                info = ['v' + package.version, 'b' + package.buildNumber]
-                    .join(' • ');
+                info = [
+                  'v' + package.version,
+                  'b' + package.buildNumber,
+                ].join(' • ');
               }
               return Padding(
                 padding: const EdgeInsets.all(8),
