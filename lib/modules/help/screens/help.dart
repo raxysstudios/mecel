@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wordle/modules/help/widgets/countdown.dart';
@@ -56,8 +57,9 @@ class HelpScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: RichText(
-              text: const TextSpan(
-                children: [
+              text: TextSpan(
+                style: GoogleFonts.robotoSlab(),
+                children: const [
                   TextSpan(
                     text: '"Д"',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -82,8 +84,9 @@ class HelpScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: RichText(
-              text: const TextSpan(
-                children: [
+              text: TextSpan(
+                style: GoogleFonts.robotoSlab(),
+                children: const [
                   TextSpan(
                     text: '"К"',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -108,8 +111,9 @@ class HelpScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: RichText(
-              text: const TextSpan(
-                children: [
+              text: TextSpan(
+                style: GoogleFonts.robotoSlab(),
+                children: const [
                   TextSpan(
                     text: '"А"',
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -136,6 +140,7 @@ class HelpScreen extends StatelessWidget {
                 final s = duration.inSeconds % 60;
                 return RichText(
                   text: TextSpan(
+                    style: GoogleFonts.robotoSlab(),
                     children: [
                       TextSpan(
                         text: '(#${getCurrentDay() + 2}) $h : $m : $s',
