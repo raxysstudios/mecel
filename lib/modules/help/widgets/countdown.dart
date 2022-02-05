@@ -19,7 +19,7 @@ class CountdownState extends State<Countdown> {
 
   @override
   void initState() {
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now();
     final tomorrow = DateTime(now.year, now.month, now.day).add(
       const Duration(days: 1),
     );
