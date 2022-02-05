@@ -12,6 +12,9 @@ class HelpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final richTextStyle = GoogleFonts.robotoSlab(
+      color: Theme.of(context).textTheme.bodyText2?.color,
+    );
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -58,7 +61,7 @@ class HelpScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: RichText(
               text: TextSpan(
-                style: GoogleFonts.robotoSlab(),
+                style: richTextStyle,
                 children: const [
                   TextSpan(
                     text: '"Д"',
@@ -85,7 +88,7 @@ class HelpScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: RichText(
               text: TextSpan(
-                style: GoogleFonts.robotoSlab(),
+                style: richTextStyle,
                 children: const [
                   TextSpan(
                     text: '"Т"',
@@ -112,7 +115,7 @@ class HelpScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: RichText(
               text: TextSpan(
-                style: GoogleFonts.robotoSlab(),
+                style: richTextStyle,
                 children: const [
                   TextSpan(
                     text: '"А"',
@@ -140,7 +143,7 @@ class HelpScreen extends StatelessWidget {
                 final s = duration.inSeconds % 60;
                 return RichText(
                   text: TextSpan(
-                    style: GoogleFonts.robotoSlab(),
+                    style: richTextStyle,
                     children: [
                       TextSpan(
                         text: '(#${getCurrentDay() + 2}) $h : $m : $s',
