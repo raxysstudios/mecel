@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wordle/modules/help/screens/help.dart';
 import 'package:wordle/modules/play/models/input_key.dart';
-import 'package:wordle/modules/play/screens/help.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
 import 'package:wordle/shared/models/language.dart';

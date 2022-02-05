@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/modules/play/widgets/letter_card.dart';
+import 'package:wordle/shared/widgets/letter_card.dart';
 
 class WordAttempt extends StatelessWidget {
   const WordAttempt({

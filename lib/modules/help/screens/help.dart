@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wordle/modules/play/widgets/letter_card.dart';
+import 'package:wordle/modules/help/widgets/countdown.dart';
+import 'package:wordle/modules/play/utils.dart';
+import 'package:wordle/shared/widgets/letter_card.dart';
 import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -123,6 +125,29 @@ class HelpScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(8),
             child: Text('Цӏиий чӏал гьар юкъуз къведа.'),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Countdown(
+              builder: (context, duration) {
+                final h = duration.inHours;
+                final m = duration.inMinutes % 60;
+                final s = duration.inSeconds % 60;
+                return RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '(#${getCurrentDay() + 2}) $h : $m : $s',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const TextSpan(text: ' чӏавалай къведай чӏал жеда.'),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
