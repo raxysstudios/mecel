@@ -2,6 +2,11 @@ import 'package:wordle/shared/models/language.dart';
 
 const lezgi = Language(
   name: 'lezgi',
+  layout: [
+    'йцукенгшзхъ',
+    'фывапролджэӏ',
+    'ячсмитьбю',
+  ],
   words: {
     'сувар',
     'кӏеви',
@@ -31,10 +36,4 @@ const lezgi = Language(
     'масан',
     'ацӏай',
   },
-  layout: [
-    'йцукенгшз',
-    'хӏъфывапр',
-    'олджэячсм',
-    'итьбю',
-  ],
 );

@@ -76,14 +76,14 @@ class _PlayScreenState extends State<PlayScreen> {
         centerTitle: true,
         title: Text(
           'MECEL',
-          style: GoogleFonts.firaMono(
+          style: GoogleFonts.robotoSlab(
             fontWeight: FontWeight.w500,
           ),
         ),
         leading: IconButton(
           onPressed: () => launch('https://t.me/raxysstudios'),
           tooltip: 'Contact',
-          icon: const Icon(Icons.send_sharp),
+          icon: const Icon(Icons.send_rounded),
         ),
         actions: [
           if (done)

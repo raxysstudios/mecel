@@ -21,35 +21,37 @@ class WordAttempt extends StatelessWidget {
         children: [
           for (var i = 0; i < length; i++)
             Expanded(
-              child: Builder(builder: (context) {
-                final char = i < text.length ? text[i] : '';
-                Color? color;
+              child: Builder(
+                builder: (context) {
+                  final char = i < text.length ? text[i] : '';
+                  Color? color;
 
-                if (check != null && char.isNotEmpty) {
-                  final j = check!.indexOf(char);
-                  color = j == -1
-                      ? Colors.blueGrey.shade400
-                      : j == i
-                          ? Colors.green.shade400
-                          : Colors.amber.shade400;
-                }
+                  if (check != null && char.isNotEmpty) {
+                    final j = check!.indexOf(char);
+                    color = j == -1
+                        ? Colors.blueGrey.shade400
+                        : j == i
+                            ? Colors.green.shade400
+                            : Colors.amber.shade400;
+                  }
 
-                return Card(
-                  color: color,
-                  elevation: 0,
-                  child: Center(
-                    child: Builder(builder: (context) {
-                      return Text(
-                        char.toUpperCase(),
-                        style: GoogleFonts.firaMono(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 32,
-                            color: color == null ? null : Colors.white),
-                      );
-                    }),
-                  ),
-                );
-              }),
+                  return Card(
+                    color: color,
+                    elevation: 0,
+                    child: Center(
+                      child: Builder(builder: (context) {
+                        return Text(
+                          char.toUpperCase(),
+                          style: GoogleFonts.robotoSlab(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 32,
+                              color: color == null ? null : Colors.white),
+                        );
+                      }),
+                    ),
+                  );
+                },
+              ),
             )
         ],
       ),

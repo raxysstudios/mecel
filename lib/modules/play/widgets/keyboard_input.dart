@@ -29,7 +29,10 @@ class KeyboardInput extends StatelessWidget {
                   Builder(
                     builder: (context) {
                       final card = Card(
-                        elevation: .5,
+                        margin: const EdgeInsets.all(2),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: InkWell(
                           onTap: key.callback ??
                               () => textCallback(key.text ?? ''),
@@ -37,8 +40,8 @@ class KeyboardInput extends StatelessWidget {
                             child: key.text == null
                                 ? Icon(key.icon)
                                 : Text(
-                                    key.text!,
-                                    style: GoogleFonts.firaMono(
+                                    key.text!.toUpperCase(),
+                                    style: GoogleFonts.robotoSlab(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 18,
                                     ),

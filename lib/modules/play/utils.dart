@@ -15,14 +15,14 @@ InputLayout layoutFromStrings({
     InputKey(
       null,
       flex: 2,
-      icon: Icons.check_sharp,
+      icon: Icons.check_rounded,
       callback: done,
     ),
     ...layout.last,
     InputKey(
       null,
       flex: 2,
-      icon: Icons.backspace_sharp,
+      icon: Icons.backspace_rounded,
       callback: backspace,
     ),
   ];
