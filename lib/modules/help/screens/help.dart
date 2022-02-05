@@ -29,7 +29,7 @@ class HelpScreen extends StatelessWidget {
         label: const Text('Алакъа авун'),
       ),
       body: ListView(
-        padding: const EdgeInsets.only(bottom: 76),
+        padding: const EdgeInsets.fromLTRB(4, 4, 4, 76),
         children: [
           const Padding(
             padding: EdgeInsets.all(8),
