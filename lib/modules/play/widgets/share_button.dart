@@ -18,6 +18,7 @@ class ShareButton extends StatelessWidget {
   String computeResultText() {
     var text = 'Raxun ${getCurrentDay()} ${attempts.length}/$maxAttempts';
     for (final attempt in attempts) {
+      text += '\n';
       for (var i = 0; i < word.length && i < attempt.length; i++) {
         if (attempt[i] == word[i]) {
           text += '🟩';
@@ -27,7 +28,6 @@ class ShareButton extends StatelessWidget {
           text += '⬜';
         }
       }
-      text += '\n';
     }
     return text;
   }
