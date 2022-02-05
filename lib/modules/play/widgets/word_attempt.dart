@@ -33,9 +33,9 @@ class WordAttempt extends StatelessWidget {
                   if (j == -1) {
                     state = LetterState.missing;
                   } else if (j == i) {
-                    state = LetterState.shifted;
-                  } else {
                     state = LetterState.present;
+                  } else {
+                    state = LetterState.shifted;
                   }
                 }
                 return LetterCard(
