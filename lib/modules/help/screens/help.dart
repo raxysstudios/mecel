@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wordle/modules/help/widgets/countdown.dart';
+import 'package:wordle/modules/home/widgets/raxys_logo.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/shared/widgets/letter_card.dart';
 import 'package:wordle/shared/widgets/rounded_back_button.dart';
@@ -17,11 +18,18 @@ class HelpScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+        // elevation: 0,
+        // backgroundColor: Colors.transparent,
         leading: const RoundedBackButton(),
         centerTitle: true,
         title: const Text('ГьикІ къугъвада?'),
+        actions: const [
+          RaxysLogo(
+            opacity: .1,
+            scale: 7,
+          ),
+          SizedBox(width: 20)
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => launch('https://t.me/raxysstudios'),
