@@ -53,17 +53,20 @@ class HelpScreen extends StatelessWidget {
             padding: EdgeInsets.all(8),
             child: Text('Мисал:'),
           ),
-          Row(
-            children: const [
-              LetterCard(text: 'к'),
-              LetterCard(text: 'ӏ'),
-              LetterCard(text: 'у'),
-              LetterCard(text: 'ь'),
-              LetterCard(
-                text: 'д',
-                state: LetterState.present,
-              ),
-            ],
+          SizedBox(
+            height: 64,
+            child: Row(
+              children: const [
+                LetterCard(text: 'к'),
+                LetterCard(text: 'ӏ'),
+                LetterCard(text: 'у'),
+                LetterCard(text: 'ь'),
+                LetterCard(
+                  text: 'д',
+                  state: LetterState.present,
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
@@ -80,17 +83,20 @@ class HelpScreen extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children: const [
-              LetterCard(text: 'к'),
-              LetterCard(text: 'у'),
-              LetterCard(
-                text: 'т',
-                state: LetterState.shifted,
-              ),
-              LetterCard(text: 'ӏ'),
-              LetterCard(text: 'а'),
-            ],
+          SizedBox(
+            height: 64,
+            child: Row(
+              children: const [
+                LetterCard(text: 'к'),
+                LetterCard(text: 'у'),
+                LetterCard(
+                  text: 'т',
+                  state: LetterState.shifted,
+                ),
+                LetterCard(text: 'ӏ'),
+                LetterCard(text: 'а'),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
@@ -107,17 +113,20 @@ class HelpScreen extends StatelessWidget {
               ),
             ),
           ),
-          Row(
-            children: const [
-              LetterCard(text: 'с'),
-              LetterCard(text: 'у'),
-              LetterCard(text: 'в'),
-              LetterCard(
-                text: 'а',
-                state: LetterState.missing,
-              ),
-              LetterCard(text: 'р'),
-            ],
+          SizedBox(
+            height: 64,
+            child: Row(
+              children: const [
+                LetterCard(text: 'с'),
+                LetterCard(text: 'у'),
+                LetterCard(text: 'в'),
+                LetterCard(
+                  text: 'а',
+                  state: LetterState.missing,
+                ),
+                LetterCard(text: 'р'),
+              ],
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),

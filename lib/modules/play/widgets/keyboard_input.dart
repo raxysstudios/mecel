@@ -16,48 +16,40 @@ class KeyboardInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (final row in layout)
-          SizedBox(
-            height: rowHeight,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (final key in row)
-                  Builder(
-                    builder: (context) {
-                      final card = Card(
-                        margin: const EdgeInsets.all(2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: InkWell(
-                          onTap: key.callback ??
-                              () => textCallback(key.text ?? ''),
-                          child: Center(
-                            child: key.text == null
-                                ? Icon(key.icon)
-                                : Text(
-                                    key.text!.toUpperCase(),
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                    ),
+    return Card(
+      clipBehavior: Clip.none,
+      child: Column(
+        children: [
+          for (final row in layout)
+            SizedBox(
+              height: rowHeight,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (final key in row)
+                    Expanded(
+                      flex: key.flex,
+                      child: InkResponse(
+                        onTap:
+                            key.callback ?? () => textCallback(key.text ?? ''),
+                        child: Center(
+                          child: key.text == null
+                              ? Icon(key.icon)
+                              : Text(
+                                  key.text!.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
                                   ),
-                          ),
+                                ),
                         ),
-                      );
-                      return Expanded(
-                        flex: key.flex,
-                        child: card,
-                      );
-                    },
-                  ),
-              ],
+                      ),
+                    )
+                ],
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

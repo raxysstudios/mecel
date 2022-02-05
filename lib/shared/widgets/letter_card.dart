@@ -38,7 +38,7 @@ class LetterCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: getBackgroundColor(colorSceme.surface),
           borderRadius: BorderRadius.all(
-            Radius.circular(text == null ? 32 : 8),
+            Radius.circular(text == null ? 32 : 4),
           ),
         ),
         child: Center(

@@ -15,7 +15,7 @@ InputLayout layoutFromStrings({
     InputKey(
       null,
       flex: 2,
-      icon: Icons.check_rounded,
+      icon: Icons.done_rounded,
       callback: done,
     ),
     ...layout.last,

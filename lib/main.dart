@@ -24,6 +24,7 @@ class App extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return MaterialApp(
       title: 'Mecel',
+      debugShowCheckedModeBanner: false,
       theme: getLightTheme(colorScheme).copyWith(
         textTheme: GoogleFonts.robotoSlabTextTheme(),
       ),

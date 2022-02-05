@@ -96,7 +96,7 @@ class _PlayScreenState extends State<PlayScreen> {
             ),
           ),
           tooltip: 'Гъил гун',
-          icon: const Icon(Icons.help_rounded),
+          icon: const Icon(Icons.help_outline_rounded),
         ),
         actions: [
           if (done)
@@ -116,14 +116,14 @@ class _PlayScreenState extends State<PlayScreen> {
               text: attempts[i],
               check: word,
             ),
-          if (done
-              ? attempts.length < widget.maxAttempts
-              : attempts.length <= widget.maxAttempts)
+          if (!done)
             WordAttempt(
               length: word.length,
               text: done ? null : attempts.last,
             ),
-          for (var i = attempts.length; i < widget.maxAttempts; i++)
+          for (var i = attempts.length - (done ? 1 : 0);
+              i < widget.maxAttempts;
+              i++)
             WordAttempt(length: word.length),
           const Expanded(
             child: SizedBox(),
