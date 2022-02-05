@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wordle/config/dark_theme.dart';
-import 'package:wordle/config/keyboard_layouts.dart';
 import 'package:wordle/config/light_theme.dart';
 import 'package:wordle/modules/play/screens/play.dart';
+import 'package:wordle/store.dart';
 
 import 'modules/home/screens/splash.dart';
 
@@ -26,10 +26,10 @@ class App extends StatelessWidget {
         onLoaded: (context) => Navigator.pushReplacement<void, void>(
           context,
           MaterialPageRoute(
-            builder: (context) => const PlayScreen(
-              layoutStrings: lezgiRows,
-              word: 'лезги',
-              maxAttempts: 5,
+            builder: (context) => PlayScreen(
+              layoutStrings: lezgi.layout,
+              word: getRandomWord(lezgi.words),
+              maxAttempts: 6,
             ),
           ),
         ),
