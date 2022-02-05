@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wordle/modules/play/models/input_key.dart';
 import 'package:wordle/modules/play/screens/help.dart';
 import 'package:wordle/modules/play/utils.dart';
