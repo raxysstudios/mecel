@@ -88,7 +88,7 @@ class HelpScreen extends StatelessWidget {
                 style: GoogleFonts.robotoSlab(),
                 children: const [
                   TextSpan(
-                    text: '"К"',
+                    text: '"Т"',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(text: ' гьарф чӏала ава, ятӏани маса чкадал.'),
