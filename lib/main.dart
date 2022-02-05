@@ -26,9 +26,8 @@ class App extends StatelessWidget {
         onLoaded: (context) => Navigator.pushReplacement<void, void>(
           context,
           MaterialPageRoute(
-            builder: (context) => PlayScreen(
-              layoutStrings: lezgi.layout,
-              word: getRandomWord(lezgi.words),
+            builder: (context) => const PlayScreen(
+              language: lezgi,
               maxAttempts: 6,
             ),
           ),
