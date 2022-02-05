@@ -1,20 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+enum LetterState { missing, shifted, present }
 
 class LetterCard extends StatelessWidget {
   const LetterCard({
-    required this.text,
-    required this.backgroundColor,
-    required this.color,
+    this.text,
+    this.state,
     Key? key,
   }) : super(key: key);
 
-  final Color? backgroundColor;
-  final Color? color;
   final String? text;
+  final LetterState? state;
+
+  Color? getBackgroundColor(Color? defaultColor) {
+    switch (state) {
+      case LetterState.missing:
+        return Colors.blueGrey.shade400;
+      case LetterState.shifted:
+        return Colors.amber.shade400;
+      case LetterState.present:
+        return Colors.green.shade400;
+      default:
+        return defaultColor;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final colorSceme = Theme.of(context).colorScheme;
+
     return Flexible(
       child: AnimatedContainer(
         margin: const EdgeInsets.all(4),
@@ -22,7 +36,7 @@ class LetterCard extends StatelessWidget {
         width: text == null ? 16 : null,
         height: text == null ? 16 : null,
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: getBackgroundColor(colorSceme.surface),
           borderRadius: BorderRadius.all(
             Radius.circular(text == null ? 32 : 8),
           ),
@@ -33,7 +47,7 @@ class LetterCard extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,
-              color: color,
+              color: state == null ? null : colorSceme.surface,
             ),
           ),
         ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/modules/play/widgets/letter_card.dart';
 
 class WordAttempt extends StatelessWidget {
@@ -16,7 +15,6 @@ class WordAttempt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
     return SizedBox(
       height: 64,
       child: Row(
@@ -28,20 +26,21 @@ class WordAttempt extends StatelessWidget {
               builder: (context) {
                 var char = '';
                 if (text != null && i < text!.length) char = text![i];
-                Color? color;
+                LetterState? state;
 
                 if (check != null && char.isNotEmpty) {
                   final j = check!.indexOf(char);
-                  color = j == -1
-                      ? Colors.blueGrey.shade400
-                      : j == i
-                          ? Colors.green.shade400
-                          : Colors.amber.shade400;
+                  if (j == -1) {
+                    state = LetterState.missing;
+                  } else if (j == i) {
+                    state = LetterState.shifted;
+                  } else {
+                    state = LetterState.present;
+                  }
                 }
                 return LetterCard(
                   text: text == null ? null : char,
-                  backgroundColor: color ?? colorScheme.surface,
-                  color: color == null ? null : colorScheme.surface,
+                  state: state,
                 );
               },
             )
