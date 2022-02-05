@@ -4,7 +4,7 @@ const lezgi = Language(
   name: 'lezgi',
   words: [
     'сувар',
-    'кӏиви',
+    'кӏеви',
     'мекьи',
     'юцӏак',
     'бицӏи',
