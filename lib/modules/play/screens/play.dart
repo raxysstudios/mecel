@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/modules/play/models/input_key.dart';
 import 'package:wordle/modules/play/utils.dart';
+import 'package:wordle/modules/play/widgets/share_button.dart';
 import 'package:wordle/shared/models/language.dart';
-import 'package:wordle/store.dart';
 
 import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
@@ -24,31 +24,54 @@ class PlayScreen extends StatefulWidget {
 
 class _PlayScreenState extends State<PlayScreen> {
   final List<String> attempts = [''];
-  late final word = getRandomWord(widget.language.words);
+  late final word = getTodaysWord(widget.language.words);
   late final InputLayout layout = layoutFromStrings(
     strings: widget.language.layout,
-    backspace: () {
-      final text = attempts.last;
-      if (text.isNotEmpty) {
-        setState(() {
-          attempts.last = text.substring(0, text.length - 1);
-        });
-      }
-    },
-    done: () {
-      if (attempts.last.length == word.length &&
-          attempts.length < widget.maxAttempts) {
-        setState(() {
-          attempts.add('');
-        });
-      }
-    },
+    backspace: backspace,
+    done: nextAttempt,
   );
+
+  bool get done {
+    if (attempts.length > 1 && attempts.last.isEmpty) {
+      final text = attempts[attempts.length - 2];
+      return text == word;
+    }
+    return false;
+  }
+
+  void backspace() {
+    final text = attempts.last;
+    if (text.isNotEmpty) {
+      setState(() {
+        attempts.last = text.substring(0, text.length - 1);
+      });
+    }
+  }
+
+  void nextAttempt() {
+    if (!done &&
+        attempts.last.length == word.length &&
+        attempts.length < widget.maxAttempts) {
+      setState(() {
+        attempts.add('');
+      });
+    }
+  }
+
+  void inputChar(String char) {
+    if (!done && attempts.last.length < word.length) {
+      setState(() {
+        attempts.last += char;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
             'Wordle',
@@ -57,8 +80,15 @@ class _PlayScreenState extends State<PlayScreen> {
             ),
           ),
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
+        actions: [
+          if (done)
+            ShareButton(
+              maxAttempts: widget.maxAttempts,
+              attempts: attempts,
+              word: word,
+            ),
+          const SizedBox(width: 4),
+        ],
       ),
       body: Column(
         children: [
@@ -73,13 +103,7 @@ class _PlayScreenState extends State<PlayScreen> {
           ),
           KeyboardInput(
             layout: layout,
-            textCallback: (c) {
-              if (attempts.last.length < word.length) {
-                setState(() {
-                  attempts.last += c;
-                });
-              }
-            },
+            textCallback: inputChar,
           ),
         ],
       ),
