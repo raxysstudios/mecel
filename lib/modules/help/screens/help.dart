@@ -149,6 +149,24 @@ class HelpScreen extends StatelessWidget {
               },
             ),
           ),
+          FutureBuilder<PackageInfo>(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              var info = '...';
+              final package = snapshot.data;
+              if (package != null) {
+                info = ['v' + package.version, 'b' + package.buildNumber]
+                    .join(' • ');
+              }
+              return Padding(
+                padding: const EdgeInsets.all(8),
+                child: Text(
+                  info,
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
