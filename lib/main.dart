@@ -17,11 +17,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return MaterialApp(
-      title: 'Wordle',
+      title: 'Mecel',
       theme: getLightTheme(colorScheme),
       darkTheme: getDarkTheme(colorScheme),
       home: SplashScreen(
-        title: 'Wordle',
+        title: 'MECEL',
         future: Future.sync(() => null),
         onLoaded: (context) => Navigator.pushReplacement<void, void>(
           context,

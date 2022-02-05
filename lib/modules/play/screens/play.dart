@@ -72,12 +72,11 @@ class _PlayScreenState extends State<PlayScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        title: Center(
-          child: Text(
-            'Wordle',
-            style: GoogleFonts.firaMono(
-              fontWeight: FontWeight.w500,
-            ),
+        centerTitle: true,
+        title: Text(
+          'MECEL',
+          style: GoogleFonts.firaMono(
+            fontWeight: FontWeight.w500,
           ),
         ),
         actions: [
