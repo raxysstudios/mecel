@@ -8,6 +8,6 @@ class Language {
 
   final String name;
   final String? flag;
-  final List<String> words;
+  final Set<String> words;
   final List<String> layout;
 }
