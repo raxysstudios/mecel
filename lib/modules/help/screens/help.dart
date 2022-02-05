@@ -72,7 +72,7 @@ class HelpScreen extends StatelessWidget {
           Row(
             children: const [
               LetterCard(text: 'к'),
-              LetterCard(text: 'ӏ'),
+              LetterCard(text: 'у'),
               LetterCard(
                 text: 'т',
                 state: LetterState.shifted,
