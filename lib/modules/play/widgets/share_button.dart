@@ -40,10 +40,10 @@ class ShareButton extends StatelessWidget {
         showSnackbar(
           context,
           icon: Icons.content_copy_rounded,
-          text: 'Copied to clipboard.',
+          text: 'Чин къачуна',
         );
       },
-      tooltip: 'Share',
+      tooltip: 'Паюн',
       icon: const Icon(Icons.share_rounded),
     );
   }

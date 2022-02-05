@@ -5,6 +5,7 @@ import 'package:wordle/modules/play/screens/help.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
 import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/shared/snackbar.dart';
 
 import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
@@ -56,6 +57,19 @@ class _PlayScreenState extends State<PlayScreen> {
       setState(() {
         attempts.add('');
       });
+      if (done) {
+        showSnackbar(
+          context,
+          icon: Icons.thumb_up_rounded,
+          text: 'Лап хъсан я',
+        );
+      } else if (attempts.length > widget.maxAttempts) {
+        showSnackbar(
+          context,
+          icon: Icons.lightbulb_rounded,
+          text: word.toUpperCase(),
+        );
+      }
     }
   }
 

@@ -11,7 +11,6 @@ void showSnackbar(
   messenger.showSnackBar(
     SnackBar(
       behavior: SnackBarBehavior.floating,
-      duration: const Duration(seconds: 2),
       backgroundColor: theme.colorScheme.surface,
       content: Row(
         children: [
