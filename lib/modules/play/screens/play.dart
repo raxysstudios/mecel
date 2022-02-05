@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wordle/modules/play/models/input_key.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
@@ -78,6 +79,11 @@ class _PlayScreenState extends State<PlayScreen> {
           style: GoogleFonts.firaMono(
             fontWeight: FontWeight.w500,
           ),
+        ),
+        leading: IconButton(
+          onPressed: () => launch('https://t.me/raxysstudios'),
+          tooltip: 'Contact',
+          icon: const Icon(Icons.send_sharp),
         ),
         actions: [
           if (done)

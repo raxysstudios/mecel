@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
 import 'package:wordle/modules/play/screens/play.dart';
@@ -7,6 +8,10 @@ import 'package:wordle/store.dart';
 import 'modules/home/screens/splash.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
   runApp(const App());
 }
 
