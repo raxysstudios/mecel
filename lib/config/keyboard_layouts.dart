@@ -1,4 +1,4 @@
-final lezgi_layout = [
+const lezgiRows = [
   'йцукенгшх',
   'ӏъфывапр',
   'олджэячсм',

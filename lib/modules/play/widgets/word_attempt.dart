@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 class WordAttempt extends StatelessWidget {
   const WordAttempt({
     required this.length,
-    required this.text,
+    this.text = '',
     this.check,
     Key? key,
   }) : super(key: key);
 
-  final String? check;
   final int length;
   final String text;
+  final String? check;
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,16 @@ class WordAttempt extends StatelessWidget {
               child: Builder(builder: (context) {
                 final char = i < text.length ? text[i] : '';
                 Color? color;
+
                 if (check != null && char.isNotEmpty) {
-                  final j = check?.indexOf(char);
+                  final j = check!.indexOf(char);
                   color = j == -1
                       ? Colors.blueGrey.shade400
                       : j == i
                           ? Colors.green.shade400
                           : Colors.amber.shade400;
                 }
+
                 return Card(
                   color: color,
                   elevation: 0,

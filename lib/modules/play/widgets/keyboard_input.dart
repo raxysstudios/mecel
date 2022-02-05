@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'input_key.dart';
+import '../models/input_key.dart';
 
 class KeyboardInput extends StatelessWidget {
   const KeyboardInput({
@@ -40,7 +40,7 @@ class KeyboardInput extends StatelessWidget {
                                     key.text!,
                                     style: GoogleFonts.firaMono(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 20,
+                                      fontSize: 18,
                                     ),
                                   ),
                           ),
