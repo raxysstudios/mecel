@@ -52,7 +52,7 @@ class _PlayScreenState extends State<PlayScreen> {
   void nextAttempt() {
     if (!done &&
         attempts.last.length == word.length &&
-        attempts.length < widget.maxAttempts) {
+        attempts.length <= widget.maxAttempts) {
       setState(() {
         attempts.add('');
       });
@@ -97,12 +97,21 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       body: Column(
         children: [
-          for (var i = 0; i < widget.maxAttempts; i++)
+          for (var i = 0; i < attempts.length - 1; i++)
             WordAttempt(
               length: word.length,
-              text: i < attempts.length ? attempts[i] : '',
-              check: i < attempts.length - 1 ? word : null,
+              text: attempts[i],
+              check: word,
             ),
+          if (done
+              ? attempts.length < widget.maxAttempts
+              : attempts.length <= widget.maxAttempts)
+            WordAttempt(
+              length: word.length,
+              text: done ? null : attempts.last,
+            ),
+          for (var i = attempts.length; i < widget.maxAttempts; i++)
+            WordAttempt(length: word.length),
           const Expanded(
             child: SizedBox(),
           ),

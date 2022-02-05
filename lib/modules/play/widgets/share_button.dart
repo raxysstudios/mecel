@@ -16,7 +16,7 @@ class ShareButton extends StatelessWidget {
   final String word;
 
   String computeResultText() {
-    var text = 'Mecel ${getCurrentDay()} ${attempts.length}/$maxAttempts';
+    var text = 'Mecel ${getCurrentDay()} ${attempts.length}/$maxAttempts\n';
     for (final attempt in attempts) {
       text += '\n';
       for (var i = 0; i < word.length && i < attempt.length; i++) {
@@ -41,7 +41,6 @@ class ShareButton extends StatelessWidget {
           context,
           icon: Icons.content_copy_rounded,
           text: 'Copied to clipboard.',
-          short: true,
         );
       },
       tooltip: 'Share',
