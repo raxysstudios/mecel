@@ -7,11 +7,11 @@ import 'package:wordle/modules/play/screens/play.dart';
 import 'modules/home/screens/splash.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => const PlayScreen(
               layoutStrings: lezgiRows,
-              word: 'lezgi',
+              word: 'лезги',
               maxAttempts: 5,
             ),
           ),
