@@ -74,11 +74,8 @@ class _PlayScreenState extends State<PlayScreen> {
         elevation: 0,
         backgroundColor: Colors.transparent,
         centerTitle: true,
-        title: Text(
-          'MECEL',
-          style: GoogleFonts.robotoSlab(
-            fontWeight: FontWeight.w500,
-          ),
+        title: const Text(
+          'MECEL'
         ),
         leading: IconButton(
           onPressed: () => launch('https://t.me/raxysstudios'),

@@ -30,7 +30,7 @@ class LetterCard extends StatelessWidget {
         child: Center(
           child: Text(
             text?.toUpperCase() ?? '',
-            style: GoogleFonts.robotoSlab(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,
               color: color,

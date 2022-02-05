@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
 import 'package:wordle/modules/play/screens/play.dart';
@@ -23,8 +24,12 @@ class App extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     return MaterialApp(
       title: 'Mecel',
-      theme: getLightTheme(colorScheme),
-      darkTheme: getDarkTheme(colorScheme),
+      theme: getLightTheme(colorScheme).copyWith(
+        textTheme: GoogleFonts.robotoSlabTextTheme(),
+      ),
+      darkTheme: getDarkTheme(colorScheme).copyWith(
+        textTheme: GoogleFonts.robotoSlabTextTheme(),
+      ),
       home: SplashScreen(
         title: 'MECEL',
         future: Future.sync(() => null),

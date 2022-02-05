@@ -41,7 +41,7 @@ class KeyboardInput extends StatelessWidget {
                                 ? Icon(key.icon)
                                 : Text(
                                     key.text!.toUpperCase(),
-                                    style: GoogleFonts.robotoSlab(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 18,
                                     ),
