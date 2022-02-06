@@ -102,6 +102,7 @@ class _PlayScreenState extends State<PlayScreen> {
               maxAttempts: widget.maxAttempts,
               attempts: attempts,
               word: word,
+              language: widget.language,
             ),
           const SizedBox(width: 4),
         ],

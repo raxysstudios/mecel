@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wordle/shared/models/language.dart';
 import 'package:wordle/shared/snackbar.dart';
 
 import '../utils.dart';
@@ -8,15 +9,20 @@ class ShareButton extends StatelessWidget {
     required this.maxAttempts,
     required this.attempts,
     required this.word,
+    required this.language,
     Key? key,
   }) : super(key: key);
 
   final int maxAttempts;
   final List<String> attempts;
   final String word;
+  final Language language;
 
   String computeResultText() {
-    var text = 'Mecel ${getCurrentDay() + 1} ${attempts.length}/$maxAttempts\n';
+    var text = 'Mecel ${getCurrentDay() + 1}'
+        ' • ${language.name} • '
+        '${attempts.length}/$maxAttempts\n';
+
     for (final attempt in attempts) {
       text += '\n';
       for (var i = 0; i < word.length && i < attempt.length; i++) {
