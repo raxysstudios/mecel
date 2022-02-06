@@ -1,16 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/modules/home/widgets/raxys_logo.dart';
 import 'package:wordle/shared/widgets/letter_card.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);
 
+  Widget buildExample(
+    BuildContext context,
+    String word,
+    int letter,
+    LetterState state,
+    String caption,
+  ) {
+    final char = word[letter];
+    return Column(
+      children: [
+        Container(
+          height: 64,
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: Row(
+            children: [
+              for (var i = 0; i < word.length; i++)
+                LetterCard(
+                  text: word[i],
+                  state: i == letter ? state : null,
+                ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8),
+          child: Text(caption),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final richTextStyle = GoogleFonts.robotoSlab(
-      color: Theme.of(context).textTheme.bodyText2?.color,
-    );
     return Scaffold(
       appBar: AppBar(
         leading: Stack(
@@ -30,111 +57,61 @@ class HelpScreen extends StatelessWidget {
         label: const Text('Play'),
       ),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(4, 4, 4, 76),
+        padding: const EdgeInsets.only(bottom: 76),
         children: [
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: Text(
-              '6 алахъундлай чӏал чир ая.\n\nГьар чирунда 5 гьарф хьана кӏанда. Рукъурундал элис ракъурдайвал.\n\nГьар цӏарафдилай плиткадин ранг масакӏа жеда, гьикьван куь гиман патаг ятӏа чӏалаз.',
+          const ListTile(
+            leading: Icon(Icons.auto_awesome_rounded),
+            title: Text('6 алахъундлай чӏал чир ая.'),
+          ),
+          const ListTile(
+            leading: SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.spellcheck_rounded),
+            ),
+            title: Text(
+              'Гьар чирунда 5 гьарф хьана кӏанда. Рукъурундал элис ракъурдайвал.',
             ),
           ),
-          const Divider(
-            indent: 8,
-            endIndent: 8,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: Text('Мисал:'),
-          ),
-          SizedBox(
-            height: 64,
-            child: Row(
-              children: const [
-                LetterCard(text: 'к'),
-                LetterCard(text: 'ӏ'),
-                LetterCard(text: 'у'),
-                LetterCard(text: 'ь'),
-                LetterCard(
-                  text: 'д',
-                  state: LetterState.present,
-                ),
-              ],
+          const ListTile(
+            leading: SizedBox(
+              height: double.infinity,
+              child: Icon(Icons.palette_rounded),
+            ),
+            title: Text(
+              'Гьар цӏарафдилай плиткадин ранг масакӏа жеда, гьикьван куь гиман патаг ятӏа чӏалаз.',
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: RichText(
-              text: TextSpan(
-                style: richTextStyle,
-                children: const [
-                  TextSpan(
-                    text: '"Д"',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: ' гьарф чІала кІан тушир чкадал ала'),
-                ],
-              ),
+          ListTile(
+            leading: const Icon(Icons.rule_rounded),
+            title: Text(
+              'Мисал',
+              style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          SizedBox(
-            height: 64,
-            child: Row(
-              children: const [
-                LetterCard(text: 'к'),
-                LetterCard(text: 'у'),
-                LetterCard(
-                  text: 'т',
-                  state: LetterState.shifted,
-                ),
-                LetterCard(text: 'ӏ'),
-                LetterCard(text: 'а'),
-              ],
-            ),
+          buildExample(
+            context,
+            'кӏуьд',
+            4,
+            LetterState.present,
+            '"Д" гьарф чІала кІан тушир чкадал ала',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: RichText(
-              text: TextSpan(
-                style: richTextStyle,
-                children: const [
-                  TextSpan(
-                    text: '"Т"',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: ' гьарф чӏала ава, ятӏани маса чкадал.'),
-                ],
-              ),
-            ),
+          buildExample(
+            context,
+            'кутӏа',
+            2,
+            LetterState.present,
+            '"Т" гьарф чӏала ава, ятӏани маса чкадал.',
           ),
-          SizedBox(
-            height: 64,
-            child: Row(
-              children: const [
-                LetterCard(
-                  text: 'с',
-                  state: LetterState.missing,
-                ),
-                LetterCard(text: 'у'),
-                LetterCard(text: 'в'),
-                LetterCard(text: 'а'),
-                LetterCard(text: 'р'),
-              ],
-            ),
+          buildExample(
+            context,
+            'сувар',
+            0,
+            LetterState.present,
+            '"С" гьарф санани чӏала авач.',
           ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: RichText(
-              text: TextSpan(
-                style: richTextStyle,
-                children: const [
-                  TextSpan(
-                    text: '"С"',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextSpan(text: ' гьарф санани чӏала авач.'),
-                ],
-              ),
-            ),
+          const ListTile(
+            leading: Icon(Icons.today_rounded),
+            title: Text('Цӏиий чӏал гьар юкъуз къведа.'),
           ),
         ],
       ),

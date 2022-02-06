@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wordle/modules/game/utils.dart';
-import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
@@ -36,7 +35,6 @@ class _StatsScreenState extends State<StatsScreen> {
           const SizedBox(width: 4),
         ],
       ),
-      floatingActionButton: ShareButton(widget.game),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 76),
         children: [
@@ -48,11 +46,8 @@ class _StatsScreenState extends State<StatsScreen> {
             title: Countdown(
               builder: (context, string) => Text(string),
             ),
-            isThreeLine: true,
-            subtitle: Text(
-              '${getCurrentDay() + 2}-ибил чӏавалай къведай чӏал жеда'
-              '\nЦӏиий чӏал гьар юкъуз къведа',
-            ),
+            subtitle:
+                Text('${getCurrentDay() + 2}-ибил чӏавалай къведай чӏал жеда.'),
           ),
           ListTile(
             onTap: () => launch('https://github.com/alkaitagi/mecel'),
