@@ -22,13 +22,19 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final lightTheme = getLightTheme(colorScheme);
+    final darkTheme = getDarkTheme(colorScheme);
     return MaterialApp(
       title: 'Mecel',
-      theme: getLightTheme(colorScheme).copyWith(
-        textTheme: GoogleFonts.robotoSlabTextTheme(),
+      theme: lightTheme.copyWith(
+        textTheme: GoogleFonts.robotoSlabTextTheme(
+          lightTheme.textTheme,
+        ),
       ),
-      darkTheme: getDarkTheme(colorScheme).copyWith(
-        textTheme: GoogleFonts.robotoSlabTextTheme(),
+      darkTheme: darkTheme.copyWith(
+        textTheme: GoogleFonts.robotoSlabTextTheme(
+          darkTheme.textTheme,
+        ),
       ),
       home: SplashScreen(
         title: 'MECEL',

@@ -12,14 +12,15 @@ class LetterCard extends StatelessWidget {
   final String? text;
   final LetterState? state;
 
-  Color? getBackgroundColor(Color? defaultColor) {
+  Color? getBackgroundColor(bool isDark, [Color? defaultColor]) {
+    final shade = isDark ? 600 : 400;
     switch (state) {
       case LetterState.missing:
-        return Colors.blueGrey.shade400;
+        return Colors.blueGrey[shade];
       case LetterState.shifted:
-        return Colors.amber.shade400;
+        return Colors.amber[shade];
       case LetterState.present:
-        return Colors.green.shade400;
+        return Colors.green[shade];
       default:
         return defaultColor;
     }
@@ -27,7 +28,7 @@ class LetterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorSceme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
 
     return Flexible(
       child: AnimatedContainer(
@@ -36,7 +37,10 @@ class LetterCard extends StatelessWidget {
         width: text == null ? 16 : null,
         height: text == null ? 16 : null,
         decoration: BoxDecoration(
-          color: getBackgroundColor(colorSceme.surface),
+          color: getBackgroundColor(
+            theme.brightness == Brightness.dark,
+            theme.colorScheme.surface,
+          ),
           borderRadius: BorderRadius.all(
             Radius.circular(text == null ? 32 : 4),
           ),
@@ -47,7 +51,7 @@ class LetterCard extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32,
-              color: state == null ? null : colorSceme.surface,
+              color: state == null ? null : Colors.white,
             ),
           ),
         ),
