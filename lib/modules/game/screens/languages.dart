@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/language.dart';
@@ -45,38 +44,41 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: widget.canSkip ? const RoundedBackButton() : null,
-        title: TextField(
-          controller: textController,
-        ),
-        actions: [
-          if (textController.text.isNotEmpty)
-            IconButton(
-              onPressed: () => textController.clear(),
-              icon: const Icon(Icons.clear_rounded),
-            ),
-          const SizedBox(width: 4),
-        ],
+        title: const Text('Languages'),
+        // title: TextField(
+        //   controller: textController,
+        // ),
+        // actions: [
+        //   if (textController.text.isNotEmpty)
+        //     IconButton(
+        //       onPressed: () => textController.clear(),
+        //       icon: const Icon(Icons.clear_rounded),
+        //     ),
+        //   const SizedBox(width: 4),
+        // ],
       ),
-      body: Builder(builder: (context) {
-        if (this.languages == null) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        final languages = filterLanguages();
-        return ListView.builder(
-          itemCount: languages.length,
-          itemBuilder: (context, i) {
-            final l = languages[i];
-            return ListTile(
-              leading: LanguageAvatar(l),
-              title: Text(l.name.titleCase),
-              subtitle: Text(l.nativeName.titleCase),
-              onTap: () => Navigator.pop(context, l),
+      body: Builder(
+        builder: (context) {
+          if (this.languages == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          },
-        );
-      }),
+          }
+          final languages = filterLanguages();
+          return ListView.builder(
+            itemCount: languages.length,
+            itemBuilder: (context, i) {
+              final l = languages[i];
+              return ListTile(
+                leading: LanguageAvatar(l),
+                title: Text(l.name.titleCase),
+                subtitle: Text(l.nativeName.titleCase),
+                onTap: () => Navigator.pop(context, l),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
