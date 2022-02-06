@@ -1,8 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/shared/services/language_assets.dart';
+import 'package:wordle/shared/widgets/language_avatar.dart';
 import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 class LanguagesScreen extends StatefulWidget {
@@ -24,15 +25,11 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
   @override
   void initState() {
     super.initState();
-    rootBundle
-        .loadString('assets/languages.json')
-        .then((r) => json.decode(r) as List<Map<String, dynamic>>)
-        .then(
-          (l) => setState(() {
-            languages = l.map((j) => Language.fromJson(j)).toList();
-            languages!.sort((a, b) => a.name.compareTo(b.name));
-          }),
-        );
+    loadLanguages(sort: true).then(
+      (l) => setState(() {
+        languages = l;
+      }),
+    );
   }
 
   List<Language> filterLanguages() {
@@ -72,8 +69,9 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
           itemBuilder: (context, i) {
             final l = languages[i];
             return ListTile(
-              title: Text(l.name),
-              subtitle: Text(l.nativeName),
+              leading: LanguageAvatar(l),
+              title: Text(l.name.titleCase),
+              subtitle: Text(l.nativeName.titleCase),
               onTap: () => Navigator.pop(context, l),
             );
           },

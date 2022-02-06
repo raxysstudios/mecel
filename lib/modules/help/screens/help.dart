@@ -18,10 +18,7 @@ class HelpScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        // elevation: 0,
-        // backgroundColor: Colors.transparent,
         leading: const RoundedBackButton(),
-        centerTitle: true,
         title: const Text('ГьикІ къугъвада?'),
         actions: const [
           RaxysLogo(

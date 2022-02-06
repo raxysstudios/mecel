@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:wordle/modules/help/screens/help.dart';
+import 'package:wordle/modules/play/screens/languages.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/input_key.dart';
+import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/shared/services/config_loader.dart';
 import 'package:wordle/shared/snackbar.dart';
+import 'package:wordle/shared/widgets/language_avatar.dart';
 
 import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
@@ -12,7 +16,7 @@ import '../widgets/word_attempt.dart';
 class PlayScreen extends StatefulWidget {
   const PlayScreen({
     required this.config,
-    required this.maxAttempts,
+    this.maxAttempts = 6,
     Key? key,
   }) : super(key: key);
 
@@ -100,19 +104,22 @@ class _PlayScreenState extends State<PlayScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
         title: const Text('MECEL'),
         leading: IconButton(
-          onPressed: () => Navigator.push<void>(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HelpScreen(),
-            ),
+          onPressed: () async {
+            final language = await Navigator.push<Language>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LanguagesScreen(),
+              ),
+            );
+            if (language != null) {
+              startGame(context, await loadConfig(language.name));
+            }
+          },
+          icon: LanguageAvatar(
+            widget.config.language,
           ),
-          tooltip: 'Гъил гун',
-          icon: const Icon(Icons.help_outline_rounded),
         ),
         actions: [
           if (done)
@@ -122,6 +129,16 @@ class _PlayScreenState extends State<PlayScreen> {
               word: word,
               language: widget.config.language,
             ),
+          IconButton(
+            onPressed: () => Navigator.push<void>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HelpScreen(),
+              ),
+            ),
+            tooltip: 'Гъил гун',
+            icon: const Icon(Icons.help_rounded),
+          ),
           const SizedBox(width: 4),
         ],
       ),

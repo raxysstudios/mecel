@@ -3,5 +3,10 @@
         "name": "lezgi",
         "nativeName": "lezgi чӏал",
         "flag": "lezgi"
+    },
+    {
+        "name": "kaitag",
+        "nativeName": "хайдакьан кув",
+        "flag": "kaitag"
     }
 ]

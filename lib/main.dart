@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
-import 'package:wordle/modules/play/screens/play.dart';
+import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/services/config_loader.dart';
 
@@ -40,15 +40,7 @@ class App extends StatelessWidget {
       home: SplashScreen<GameConfig>(
         title: 'MECEL',
         future: loadConfig('lezgi'),
-        onLoaded: (context, config) => Navigator.pushReplacement<void, void>(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PlayScreen(
-              config: config,
-              maxAttempts: 6,
-            ),
-          ),
-        ),
+        onLoaded: startGame,
       ),
     );
   }
