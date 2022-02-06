@@ -35,45 +35,47 @@ class _PlayScreenState extends State<PlayScreen> {
     done: submit,
   );
 
-  void backspace() {
-    if (text.isNotEmpty) {
-      setState(() {
-        text = text.substring(0, text.length - 1);
-      });
+  void submit() {
+    if (done || attempts.length >= widget.maxAttempts) return;
+    if (!widget.language.words.contains(text)) {
+      showSnackbar(
+        context,
+        icon: Icons.search_off_rounded,
+        text: 'Unknown word',
+      );
+    }
+    setState(() {
+      attempts.add(text);
+      done = text == word;
+      text = '';
+    });
+    if (done) {
+      showSnackbar(
+        context,
+        icon: Icons.thumb_up_rounded,
+        text: 'Лап хъсан я',
+      );
+    } else if (attempts.length >= widget.maxAttempts) {
+      showSnackbar(
+        context,
+        icon: Icons.lightbulb_rounded,
+        text: word.toUpperCase(),
+      );
     }
   }
 
-  void submit() {
-    if (!done &&
-        text.length == word.length &&
-        attempts.length < widget.maxAttempts) {
-      setState(() {
-        attempts.add(text);
-        done = text == word;
-        text = '';
-      });
-      if (done) {
-        showSnackbar(
-          context,
-          icon: Icons.thumb_up_rounded,
-          text: 'Лап хъсан я',
-        );
-      } else if (attempts.length >= widget.maxAttempts) {
-        showSnackbar(
-          context,
-          icon: Icons.lightbulb_rounded,
-          text: word.toUpperCase(),
-        );
-      }
-    }
+  void backspace() {
+    if (done || text.isEmpty) return;
+    setState(() {
+      text = text.substring(0, text.length - 1);
+    });
   }
 
   void input(String char) {
-    if (!done && text.length < word.length) {
-      setState(() {
-        text += char;
-      });
-    }
+    if (done || text.length >= word.length) return;
+    setState(() {
+      text += char;
+    });
   }
 
   @override
