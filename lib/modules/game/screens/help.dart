@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:wordle/modules/help/widgets/countdown.dart';
 import 'package:wordle/modules/home/widgets/raxys_logo.dart';
-import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/shared/widgets/letter_card.dart';
-import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);
@@ -18,20 +13,21 @@ class HelpScreen extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        leading: const RoundedBackButton(),
+        leading: Stack(
+          alignment: Alignment.center,
+          children: const [
+            RaxysLogo(
+              opacity: .1,
+              scale: 7,
+            ),
+          ],
+        ),
         title: const Text('ГьикІ къугъвада?'),
-        actions: const [
-          RaxysLogo(
-            opacity: .1,
-            scale: 7,
-          ),
-          SizedBox(width: 20)
-        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => launch('https://t.me/raxysstudios'),
-        icon: const Icon(Icons.send_rounded),
-        label: const Text('Алакъа авун'),
+        onPressed: () => Navigator.pop(context),
+        icon: const Icon(Icons.play_arrow_rounded),
+        label: const Text('Play'),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(4, 4, 4, 76),
@@ -139,55 +135,6 @@ class HelpScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          const Divider(
-            indent: 8,
-            endIndent: 8,
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8),
-            child: Text('Цӏиий чӏал гьар юкъуз къведа.'),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Countdown(
-              builder: (context, string) {
-                return RichText(
-                  text: TextSpan(
-                    style: richTextStyle,
-                    children: [
-                      TextSpan(
-                        text: '(#${getCurrentDay() + 2}) $string',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const TextSpan(text: ' чӏавалай къведай чӏал жеда.'),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-          FutureBuilder<PackageInfo>(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              var info = '...';
-              final package = snapshot.data;
-              if (package != null) {
-                info = [
-                  'v' + package.version,
-                  'b' + package.buildNumber,
-                ].join(' • ');
-              }
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  info,
-                  style: Theme.of(context).textTheme.caption,
-                ),
-              );
-            },
           ),
         ],
       ),

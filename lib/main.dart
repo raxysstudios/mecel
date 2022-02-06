@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
-import 'package:wordle/modules/play/utils.dart';
+import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/services/config_loader.dart';
 

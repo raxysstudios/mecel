@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/modules/help/screens/help.dart';
-import 'package:wordle/modules/play/screens/languages.dart';
-import 'package:wordle/modules/play/utils.dart';
-import 'package:wordle/modules/play/widgets/share_button.dart';
+import 'package:wordle/modules/game/screens/help.dart';
+import 'package:wordle/modules/game/screens/languages.dart';
+import 'package:wordle/modules/game/utils.dart';
+import 'package:wordle/modules/stats/screens/stats.dart';
+import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/shared/models/game_config.dart';
+import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/models/language.dart';
 import 'package:wordle/shared/services/config_loader.dart';
@@ -13,8 +15,8 @@ import 'package:wordle/shared/widgets/language_avatar.dart';
 import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
 
-class PlayScreen extends StatefulWidget {
-  const PlayScreen({
+class GameScreen extends StatefulWidget {
+  const GameScreen({
     required this.config,
     this.maxAttempts = 6,
     Key? key,
@@ -24,16 +26,24 @@ class PlayScreen extends StatefulWidget {
   final int maxAttempts;
 
   @override
-  _PlayScreenState createState() => _PlayScreenState();
+  GameScreenState createState() => GameScreenState();
 }
 
-class _PlayScreenState extends State<PlayScreen> {
+class GameScreenState extends State<GameScreen> {
   late final word = getTodaysWord(widget.config.words);
   var text = '';
   final attempts = <String>[];
   var done = false;
 
   late final InputLayout layout;
+
+  GameState get game => GameState(
+        config: widget.config,
+        attempts: attempts,
+        maxAttempts: widget.maxAttempts,
+        word: word,
+        done: done,
+      );
 
   @override
   void initState() {
@@ -59,8 +69,9 @@ class _PlayScreenState extends State<PlayScreen> {
 
   void submit() {
     if (done || attempts.length >= widget.maxAttempts) return;
+    if (text.length < word.length) return;
     if (!widget.config.words.contains(text)) {
-      showSnackbar(
+      return showSnackbar(
         context,
         icon: Icons.search_off_rounded,
         text: 'Unknown word',
@@ -122,13 +133,18 @@ class _PlayScreenState extends State<PlayScreen> {
           ),
         ),
         actions: [
-          if (done)
-            ShareButton(
-              maxAttempts: widget.maxAttempts,
-              attempts: attempts,
-              word: word,
-              language: widget.config.language,
+          IconButton(
+            onPressed: () => Navigator.push<Language>(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StatsScreen(game),
+              ),
             ),
+            tooltip: 'Statistics',
+            icon: const Icon(
+              Icons.leaderboard_rounded,
+            ),
+          ),
           IconButton(
             onPressed: () => Navigator.push<void>(
               context,
@@ -142,36 +158,37 @@ class _PlayScreenState extends State<PlayScreen> {
           const SizedBox(width: 4),
         ],
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(4),
-            child: Column(
-              children: [
-                for (final attempt in attempts)
-                  WordAttempt(
-                    length: word.length,
-                    text: attempt,
-                    check: word,
-                  ),
-                if (!done && attempts.length < widget.maxAttempts)
-                  WordAttempt(
-                    length: word.length,
-                    text: text,
-                  ),
-                for (var i = attempts.length + (done ? 0 : 1);
-                    i < widget.maxAttempts;
-                    i++)
-                  WordAttempt(length: word.length),
-              ],
+      floatingActionButton: done ? ShareButton(game) : null,
+      bottomSheet: done
+          ? null
+          : SizedBox(
+              height: 8 + 48.0 * layout.length,
+              child: KeyboardInput(
+                layout: layout,
+                textCallback: input,
+              ),
             ),
-          ),
-          const Spacer(),
-          KeyboardInput(
-            layout: layout,
-            textCallback: input,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(4),
+        child: Column(
+          children: [
+            for (final attempt in attempts)
+              WordAttempt(
+                length: word.length,
+                text: attempt,
+                check: word,
+              ),
+            if (!done && attempts.length < widget.maxAttempts)
+              WordAttempt(
+                length: word.length,
+                text: text,
+              ),
+            for (var i = attempts.length + (done ? 0 : 1);
+                i < widget.maxAttempts;
+                i++)
+              WordAttempt(length: word.length),
+          ],
+        ),
       ),
     );
   }

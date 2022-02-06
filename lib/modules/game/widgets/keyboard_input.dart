@@ -17,7 +17,6 @@ class KeyboardInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      clipBehavior: Clip.none,
       child: Column(
         children: [
           for (final row in layout)

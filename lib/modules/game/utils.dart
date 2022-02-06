@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wordle/shared/models/game_config.dart';
 
-import 'screens/play.dart';
+import 'screens/game.dart';
 
 String getTodaysWord(Set<String> words) {
   final day = getCurrentDay();
@@ -29,7 +29,7 @@ Future<void> startGame(BuildContext context, GameConfig config) {
   return Navigator.pushReplacement<void, void>(
     context,
     MaterialPageRoute(
-      builder: (context) => PlayScreen(
+      builder: (context) => GameScreen(
         config: config,
       ),
     ),
