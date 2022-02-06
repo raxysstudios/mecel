@@ -99,14 +99,14 @@ class HelpScreen extends StatelessWidget {
             context,
             'кутӏа',
             2,
-            LetterState.present,
+            LetterState.shifted,
             '"Т" гьарф чӏала ава, ятӏани маса чкадал.',
           ),
           buildExample(
             context,
             'сувар',
             0,
-            LetterState.present,
+            LetterState.missing,
             '"С" гьарф санани чӏала авач.',
           ),
           const ListTile(
