@@ -144,24 +144,29 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       body: Column(
         children: [
-          for (final attempt in attempts)
-            WordAttempt(
-              length: word.length,
-              text: attempt,
-              check: word,
+          Padding(
+            padding: const EdgeInsets.all(4),
+            child: Column(
+              children: [
+                for (final attempt in attempts)
+                  WordAttempt(
+                    length: word.length,
+                    text: attempt,
+                    check: word,
+                  ),
+                if (!done && attempts.length < widget.maxAttempts)
+                  WordAttempt(
+                    length: word.length,
+                    text: text,
+                  ),
+                for (var i = attempts.length + (done ? 0 : 1);
+                    i < widget.maxAttempts;
+                    i++)
+                  WordAttempt(length: word.length),
+              ],
             ),
-          if (!done && attempts.length < widget.maxAttempts)
-            WordAttempt(
-              length: word.length,
-              text: text,
-            ),
-          for (var i = attempts.length + (done ? 0 : 1);
-              i < widget.maxAttempts;
-              i++)
-            WordAttempt(length: word.length),
-          const Expanded(
-            child: SizedBox(),
           ),
+          const Spacer(),
           KeyboardInput(
             layout: layout,
             textCallback: input,
