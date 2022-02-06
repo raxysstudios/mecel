@@ -3,7 +3,7 @@ import 'package:wordle/modules/help/screens/help.dart';
 import 'package:wordle/modules/play/models/input_key.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
-import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/snackbar.dart';
 
 import '../widgets/keyboard_input.dart';
@@ -11,12 +11,12 @@ import '../widgets/word_attempt.dart';
 
 class PlayScreen extends StatefulWidget {
   const PlayScreen({
-    required this.language,
+    required this.config,
     required this.maxAttempts,
     Key? key,
   }) : super(key: key);
 
-  final Language language;
+  final GameConfig config;
   final int maxAttempts;
 
   @override
@@ -24,20 +24,20 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  late final word = getTodaysWord(widget.language.words);
+  late final word = getTodaysWord(widget.config.words);
   var text = '';
   final attempts = <String>[];
   var done = false;
 
   late final InputLayout layout = layoutFromStrings(
-    strings: widget.language.layout,
+    strings: widget.config.language.layout,
     backspace: backspace,
     done: submit,
   );
 
   void submit() {
     if (done || attempts.length >= widget.maxAttempts) return;
-    if (!widget.language.words.contains(text)) {
+    if (!widget.config.words.contains(text)) {
       showSnackbar(
         context,
         icon: Icons.search_off_rounded,
@@ -102,7 +102,7 @@ class _PlayScreenState extends State<PlayScreen> {
               maxAttempts: widget.maxAttempts,
               attempts: attempts,
               word: word,
-              language: widget.language,
+              language: widget.config.language,
             ),
           const SizedBox(width: 4),
         ],
