@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wordle/modules/help/screens/help.dart';
-import 'package:wordle/modules/play/models/input_key.dart';
 import 'package:wordle/modules/play/utils.dart';
 import 'package:wordle/modules/play/widgets/share_button.dart';
 import 'package:wordle/shared/models/game_config.dart';
+import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/snackbar.dart';
 
 import '../widgets/keyboard_input.dart';
@@ -29,11 +29,29 @@ class _PlayScreenState extends State<PlayScreen> {
   final attempts = <String>[];
   var done = false;
 
-  late final InputLayout layout = layoutFromStrings(
-    strings: widget.config.language.layout,
-    backspace: backspace,
-    done: submit,
-  );
+  late final InputLayout layout;
+
+  @override
+  void initState() {
+    super.initState();
+
+    layout = widget.config.layout;
+    layout.last = [
+      InputKey(
+        null,
+        flex: 2,
+        icon: Icons.done_rounded,
+        callback: submit,
+      ),
+      ...layout.last,
+      InputKey(
+        null,
+        flex: 2,
+        icon: Icons.backspace_rounded,
+        callback: backspace,
+      ),
+    ];
+  }
 
   void submit() {
     if (done || attempts.length >= widget.maxAttempts) return;

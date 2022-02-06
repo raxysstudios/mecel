@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/shared/utils.dart';
 
 Future<List<Language>> loadLanguages({bool sort = false}) async {
   final data = await rootBundle
       .loadString('assets/languages.json')
-      .then((r) => json.decode(r) as List<Map<String, dynamic>>);
-
-  final languages = data.map((o) => Language.fromJson(o)).toList();
+      .then((r) => json.decode(r) as List);
+  final languages = listFromJson(
+    data,
+    (dynamic j) => Language.fromJson(j as Map<String, dynamic>),
+  );
   if (sort) {
     languages.sort((a, b) => a.name.compareTo(b.name));
   }

@@ -39,7 +39,7 @@ class App extends StatelessWidget {
       ),
       home: SplashScreen<GameConfig>(
         title: 'MECEL',
-        future: loadConfig(),
+        future: loadConfig('lezgi'),
         onLoaded: (context, config) => Navigator.pushReplacement<void, void>(
           context,
           MaterialPageRoute(

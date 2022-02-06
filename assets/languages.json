@@ -2,11 +2,6 @@
     {
         "name": "lezgi",
         "nativeName": "lezgi чӏал",
-        "flag": "lezgi",
-        "layout": [
-            "йцукенгшзхъ",
-            "фывапролджэӏ",
-            "ячсмитьбю"
-        ]
+        "flag": "lezgi"
     }
 ]

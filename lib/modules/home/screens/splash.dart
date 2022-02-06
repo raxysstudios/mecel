@@ -18,8 +18,8 @@ class SplashScreen<T> extends StatelessWidget {
   final void Function(BuildContext, T) onLoaded;
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
+  Widget build(context) {
+    return FutureBuilder<List>(
       future: Future.wait<dynamic>([
         Future<dynamic>.delayed(minDuration),
         future,
@@ -29,7 +29,7 @@ class SplashScreen<T> extends StatelessWidget {
           SchedulerBinding.instance?.addPostFrameCallback(
             (_) => onLoaded(
               context,
-              (snapshot.data as List)[1] as T,
+              snapshot.data![1] as T,
             ),
           );
         }
