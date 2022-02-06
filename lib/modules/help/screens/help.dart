@@ -117,13 +117,13 @@ class HelpScreen extends StatelessWidget {
             height: 64,
             child: Row(
               children: const [
-                LetterCard(text: 'с'),
-                LetterCard(text: 'у'),
-                LetterCard(text: 'в'),
                 LetterCard(
-                  text: 'а',
+                  text: 'с',
                   state: LetterState.missing,
                 ),
+                LetterCard(text: 'у'),
+                LetterCard(text: 'в'),
+                LetterCard(text: 'а'),
                 LetterCard(text: 'р'),
               ],
             ),
@@ -135,7 +135,7 @@ class HelpScreen extends StatelessWidget {
                 style: richTextStyle,
                 children: const [
                   TextSpan(
-                    text: '"А"',
+                    text: '"С"',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSpan(text: ' гьарф санани чӏала авач.'),
