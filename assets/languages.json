@@ -8,5 +8,10 @@
         "name": "kaitag",
         "nativeName": "хайдакьан кув",
         "flag": "kaitag"
+    },
+    {
+        "name": "iron",
+        "nativeName": "дигорон ӕвзаг",
+        "flag": "ossetian"
     }
 ]
