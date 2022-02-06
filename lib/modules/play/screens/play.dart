@@ -24,37 +24,33 @@ class PlayScreen extends StatefulWidget {
 }
 
 class _PlayScreenState extends State<PlayScreen> {
-  final List<String> attempts = [''];
   late final word = getTodaysWord(widget.language.words);
+  var text = '';
+  final attempts = <String>[];
+  var done = false;
+
   late final InputLayout layout = layoutFromStrings(
     strings: widget.language.layout,
     backspace: backspace,
-    done: nextAttempt,
+    done: submit,
   );
 
-  bool get done {
-    if (attempts.length > 1 && attempts.last.isEmpty) {
-      final text = attempts[attempts.length - 2];
-      return text == word;
-    }
-    return false;
-  }
-
   void backspace() {
-    final text = attempts.last;
     if (text.isNotEmpty) {
       setState(() {
-        attempts.last = text.substring(0, text.length - 1);
+        text = text.substring(0, text.length - 1);
       });
     }
   }
 
-  void nextAttempt() {
+  void submit() {
     if (!done &&
-        attempts.last.length == word.length &&
-        attempts.length <= widget.maxAttempts) {
+        text.length == word.length &&
+        attempts.length < widget.maxAttempts) {
       setState(() {
-        attempts.add('');
+        attempts.add(text);
+        done = text == word;
+        text = '';
       });
       if (done) {
         showSnackbar(
@@ -62,7 +58,7 @@ class _PlayScreenState extends State<PlayScreen> {
           icon: Icons.thumb_up_rounded,
           text: 'Лап хъсан я',
         );
-      } else if (attempts.length > widget.maxAttempts) {
+      } else if (attempts.length >= widget.maxAttempts) {
         showSnackbar(
           context,
           icon: Icons.lightbulb_rounded,
@@ -72,10 +68,10 @@ class _PlayScreenState extends State<PlayScreen> {
     }
   }
 
-  void inputChar(String char) {
-    if (!done && attempts.last.length < word.length) {
+  void input(String char) {
+    if (!done && text.length < word.length) {
       setState(() {
-        attempts.last += char;
+        text += char;
       });
     }
   }
@@ -110,18 +106,18 @@ class _PlayScreenState extends State<PlayScreen> {
       ),
       body: Column(
         children: [
-          for (var i = 0; i < attempts.length - 1; i++)
+          for (final attempt in attempts)
             WordAttempt(
               length: word.length,
-              text: attempts[i],
+              text: attempt,
               check: word,
             ),
-          if (!done)
+          if (!done && attempts.length < widget.maxAttempts)
             WordAttempt(
               length: word.length,
-              text: done ? null : attempts.last,
+              text: text,
             ),
-          for (var i = attempts.length - (done ? 1 : 0);
+          for (var i = attempts.length + (done ? 0 : 1);
               i < widget.maxAttempts;
               i++)
             WordAttempt(length: word.length),
@@ -130,7 +126,7 @@ class _PlayScreenState extends State<PlayScreen> {
           ),
           KeyboardInput(
             layout: layout,
-            textCallback: inputChar,
+            textCallback: input,
           ),
         ],
       ),

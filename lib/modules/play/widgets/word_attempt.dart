@@ -19,7 +19,6 @@ class WordAttempt extends StatelessWidget {
       height: 64,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           for (var i = 0; i < length; i++)
             Builder(
