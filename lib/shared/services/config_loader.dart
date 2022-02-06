@@ -8,7 +8,7 @@ import 'package:wordle/shared/utils.dart';
 
 import '../models/game_config.dart';
 
-Future<GameConfig> loadConfig(String languageName) async {
+Future<GameConfig> loadConfig(String? languageName) async {
   final language = await findLanguage(languageName);
   final data = await rootBundle
       .loadString('assets/languages/${language.name}.json')

@@ -18,7 +18,7 @@ Future<List<Language>> loadLanguages({bool sort = false}) async {
   return languages;
 }
 
-Future<Language> findLanguage(String name) async {
+Future<Language> findLanguage(String? name) async {
   final languages = await loadLanguages();
   return languages.firstWhere(
     (l) => l.name == name,

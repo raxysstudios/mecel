@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
 import 'package:wordle/modules/game/utils.dart';
@@ -39,7 +40,11 @@ class App extends StatelessWidget {
       ),
       home: SplashScreen<GameConfig>(
         title: 'MECEL',
-        future: loadConfig('lezgi'),
+        future: SharedPreferences.getInstance().then(
+          (prefs) => loadConfig(
+            prefs.getString('language'),
+          ),
+        ),
         onLoaded: startGame,
       ),
     );

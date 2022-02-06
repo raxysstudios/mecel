@@ -25,8 +25,8 @@ Future<void> copyText(BuildContext context, String? text) async {
   }
 }
 
-Future<void> startGame(BuildContext context, GameConfig config) {
-  return Navigator.pushReplacement<void, void>(
+void startGame(BuildContext context, GameConfig config) {
+  Navigator.pushReplacement<void, void>(
     context,
     MaterialPageRoute(
       builder: (context) => GameScreen(

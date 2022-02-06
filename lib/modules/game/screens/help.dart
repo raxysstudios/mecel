@@ -12,7 +12,6 @@ class HelpScreen extends StatelessWidget {
     LetterState state,
     String caption,
   ) {
-    final char = word[letter];
     return Column(
       children: [
         Container(

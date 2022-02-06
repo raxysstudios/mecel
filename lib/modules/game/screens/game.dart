@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/screens/languages.dart';
 import 'package:wordle/modules/game/utils.dart';
-import 'package:wordle/modules/stats/screens/stats.dart';
 import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/game_state.dart';
@@ -112,26 +112,28 @@ class GameScreenState extends State<GameScreen> {
     });
   }
 
+  void changeLanguage() async {
+    final language = await Navigator.push<Language>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LanguagesScreen(),
+      ),
+    );
+    if (language != null) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('language', language.name);
+      startGame(context, await loadConfig(language.name));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MECEL'),
         leading: IconButton(
-          onPressed: () async {
-            final language = await Navigator.push<Language>(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LanguagesScreen(),
-              ),
-            );
-            if (language != null) {
-              startGame(context, await loadConfig(language.name));
-            }
-          },
-          icon: LanguageAvatar(
-            widget.config.language,
-          ),
+          onPressed: changeLanguage,
+          icon: LanguageAvatar(widget.config.language),
         ),
         actions: [
           // IconButton(
