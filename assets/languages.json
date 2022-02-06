@@ -11,6 +11,11 @@
     },
     {
         "name": "iron",
+        "nativeName": "ирон ӕвзаг",
+        "flag": "ossetian"
+    },
+    {
+        "name": "digoron",
         "nativeName": "дигорон ӕвзаг",
         "flag": "ossetian"
     }
