@@ -68,15 +68,16 @@ class GameScreenState extends State<GameScreen> {
   }
 
   void submit() {
-    if (done || attempts.length >= widget.maxAttempts) return;
-    if (text.length < word.length) return;
-    if (!widget.config.words.contains(text)) {
-      return showSnackbar(
-        context,
-        icon: Icons.search_off_rounded,
-        text: 'Unknown word',
-      );
-    }
+    if (done ||
+        text.length < word.length ||
+        attempts.length >= widget.maxAttempts) return;
+    // if (!widget.config.words.contains(text)) {
+    //   return showSnackbar(
+    //     context,
+    //     icon: Icons.search_off_rounded,
+    //     text: 'Unknown word',
+    //   );
+    // }
     setState(() {
       attempts.add(text);
       done = text == word;
@@ -133,18 +134,18 @@ class GameScreenState extends State<GameScreen> {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () => Navigator.push<Language>(
-              context,
-              MaterialPageRoute(
-                builder: (context) => StatsScreen(game),
-              ),
-            ),
-            tooltip: 'Statistics',
-            icon: const Icon(
-              Icons.leaderboard_rounded,
-            ),
-          ),
+          // IconButton(
+          //   onPressed: () => Navigator.push<Language>(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => StatsScreen(game),
+          //     ),
+          //   ),
+          //   tooltip: 'Statistics',
+          //   icon: const Icon(
+          //     Icons.leaderboard_rounded,
+          //   ),
+          // ),
           IconButton(
             onPressed: () => Navigator.push<void>(
               context,
