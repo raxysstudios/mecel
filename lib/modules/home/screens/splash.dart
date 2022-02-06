@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../widgets/raxys_logo.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen<T> extends StatelessWidget {
   const SplashScreen({
     required this.title,
     required this.future,
@@ -14,20 +14,23 @@ class SplashScreen extends StatelessWidget {
 
   final Duration minDuration;
   final String title;
-  final Future<void> future;
-  final void Function(BuildContext) onLoaded;
+  final Future<T> future;
+  final void Function(BuildContext, T) onLoaded;
 
   @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Future.wait<void>([
-        Future.delayed(minDuration),
+  Widget build(context) {
+    return FutureBuilder<List>(
+      future: Future.wait<dynamic>([
+        Future<dynamic>.delayed(minDuration),
         future,
       ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           SchedulerBinding.instance?.addPostFrameCallback(
-            (_) => onLoaded(context),
+            (_) => onLoaded(
+              context,
+              snapshot.data![1] as T,
+            ),
           );
         }
         return Material(

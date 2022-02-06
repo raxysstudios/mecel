@@ -18,4 +18,7 @@ ThemeData getLightTheme(ColorScheme colorScheme) => ThemeData().copyWith(
         foregroundColor: colorScheme.onPrimary,
       ),
       dividerTheme: const DividerThemeData(space: 0),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.transparent,
+      ),
     );

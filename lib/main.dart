@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
-import 'package:wordle/modules/play/screens/play.dart';
-import 'package:wordle/store.dart';
+import 'package:wordle/modules/game/utils.dart';
+import 'package:wordle/shared/models/game_config.dart';
+import 'package:wordle/shared/services/config_loader.dart';
 
 import 'modules/home/screens/splash.dart';
 
@@ -36,18 +38,14 @@ class App extends StatelessWidget {
           darkTheme.textTheme,
         ),
       ),
-      home: SplashScreen(
+      home: SplashScreen<GameConfig>(
         title: 'MECEL',
-        future: Future.sync(() => null),
-        onLoaded: (context) => Navigator.pushReplacement<void, void>(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const PlayScreen(
-              language: lezgi,
-              maxAttempts: 6,
-            ),
+        future: SharedPreferences.getInstance().then(
+          (prefs) => loadConfig(
+            prefs.getString('language'),
           ),
         ),
+        onLoaded: startGame,
       ),
     );
   }

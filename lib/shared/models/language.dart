@@ -1,13 +1,19 @@
 class Language {
+  final String name;
+  final String nativeName;
+  final String flag;
+
   const Language({
     required this.name,
-    this.flag,
-    required this.layout,
-    required this.words,
+    required this.nativeName,
+    required this.flag,
   });
 
-  final String name;
-  final String? flag;
-  final List<String> layout;
-  final Set<String> words;
+  factory Language.fromJson(Map<String, dynamic> json) {
+    return Language(
+      name: json['name'] as String,
+      nativeName: json['nativeName'] as String,
+      flag: json['flag'] as String,
+    );
+  }
 }

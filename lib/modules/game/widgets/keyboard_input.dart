@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/input_key.dart';
+import '../../../shared/models/input_key.dart';
 
 class KeyboardInput extends StatelessWidget {
   const KeyboardInput({
@@ -17,7 +17,6 @@ class KeyboardInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      clipBehavior: Clip.none,
       child: Column(
         children: [
           for (final row in layout)

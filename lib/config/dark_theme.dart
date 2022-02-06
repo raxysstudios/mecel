@@ -14,4 +14,7 @@ ThemeData getDarkTheme(ColorScheme colorScheme) => ThemeData.dark().copyWith(
         foregroundColor: colorScheme.onPrimary,
       ),
       dividerTheme: const DividerThemeData(space: 0),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: Colors.transparent,
+      ),
     );
