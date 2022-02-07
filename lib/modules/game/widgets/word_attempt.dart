@@ -28,13 +28,12 @@ class WordAttempt extends StatelessWidget {
                 LetterState? state;
 
                 if (check != null && char.isNotEmpty) {
-                  final j = check!.indexOf(char);
-                  if (j == -1) {
-                    state = LetterState.missing;
-                  } else if (j == i) {
+                  if (char == check![i]) {
                     state = LetterState.present;
-                  } else {
+                  } else if (check!.contains(char)) {
                     state = LetterState.shifted;
+                  } else {
+                    state = LetterState.missing;
                   }
                 }
                 return LetterCard(
