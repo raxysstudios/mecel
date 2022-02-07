@@ -39,18 +39,14 @@ class ShareButton extends StatelessWidget {
   Future<void> share(BuildContext context) async {
     final text = getSharingText();
     await copyText(context, text);
-    showSnackbar(
-      context,
-      icon: Icons.content_copy_rounded,
-      text: 'Чин къачуна',
-    );
+    showSnackbar(context, Icons.content_copy_rounded, context.lclz('copied'));
   }
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton.extended(
       onPressed: () => share(context),
-      label: const Text('Паюн'),
+      label: Text(context.lclz('share')),
       icon: const Icon(Icons.share_rounded),
     );
   }

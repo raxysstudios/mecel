@@ -7,6 +7,8 @@ class GameState {
   String word;
   bool done;
 
+  String lclz(String key) => config.localization[key] ?? 'error';
+
   GameState({
     required this.config,
     this.maxAttempts = 6,

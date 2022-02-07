@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wordle/modules/home/widgets/raxys_logo.dart';
+import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/widgets/letter_card.dart';
 
 class HelpScreen extends StatelessWidget {
@@ -42,76 +43,56 @@ class HelpScreen extends StatelessWidget {
         leading: Stack(
           alignment: Alignment.center,
           children: const [
-            RaxysLogo(
-              opacity: .1,
-              scale: 7,
-            ),
+            RaxysLogo(opacity: .1, scale: 7),
           ],
         ),
-        title: const Text('ГьикІ къугъвада?'),
+        title: Text(context.lclz('howTo')),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => Navigator.pop(context),
         icon: const Icon(Icons.play_arrow_rounded),
-        label: const Text('Play'),
+        label: Text(context.lclz('play')),
       ),
       body: ListView(
         padding: const EdgeInsets.only(bottom: 76),
         children: [
-          const ListTile(
-            leading: Icon(Icons.auto_awesome_rounded),
-            title: Text('6 алахъундлай чӏал чир ая.'),
+          ListTile(
+            leading: const Icon(Icons.auto_awesome_rounded),
+            title: Text(context.lclz('guesses')),
           ),
-          const ListTile(
-            leading: SizedBox(
+          ListTile(
+            leading: const SizedBox(
               height: double.infinity,
               child: Icon(Icons.spellcheck_rounded),
             ),
-            title: Text(
-              'Гьар чирунда 5 гьарф хьана кӏанда. Рукъурундал элис ракъурдайвал.',
-            ),
+            title: Text(context.lclz('letters')),
           ),
-          const ListTile(
-            leading: SizedBox(
+          ListTile(
+            leading: const SizedBox(
               height: double.infinity,
               child: Icon(Icons.palette_rounded),
             ),
-            title: Text(
-              'Гьар цӏарафдилай плиткадин ранг масакӏа жеда, гьикьван куь гиман патаг ятӏа чӏалаз.',
-            ),
+            title: Text(context.lclz('colors')),
           ),
-          const ListTile(
-            leading: Icon(Icons.today_rounded),
-            title: Text('Цӏиий чӏал гьар юкъуз къведа.'),
+          ListTile(
+            leading: const Icon(Icons.today_rounded),
+            title: Text(context.lclz('daily')),
           ),
           ListTile(
             leading: const Icon(Icons.rule_rounded),
             title: Text(
-              'Мисал',
+              context.lclz('examples'),
               style: Theme.of(context).textTheme.headline6,
             ),
           ),
-          buildExample(
-            context,
-            'кӏуьд',
-            4,
-            LetterState.present,
-            '"Д" гьарф чІала кІан тушир чкадал ала',
-          ),
-          buildExample(
-            context,
-            'кутӏа',
-            2,
-            LetterState.shifted,
-            '"Т" гьарф чӏала ава, ятӏани маса чкадал.',
-          ),
-          buildExample(
-            context,
-            'сувар',
-            0,
-            LetterState.missing,
-            '"С" гьарф санани чӏала авач.',
-          ),
+          for (var i = 1; i <= 3; i++)
+            buildExample(
+              context,
+              context.lclz('e${i}Word'),
+              (i - 1) * 2,
+              LetterState.values[3 - i],
+              context.lclz('e${i}Caption'),
+            ),
         ],
       ),
     );

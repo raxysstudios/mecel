@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/screens/languages.dart';
 import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/modules/game/widgets/share_button.dart';
+import 'package:wordle/modules/settings/screens/settings.dart';
+import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/models/input_key.dart';
@@ -82,17 +85,9 @@ class GameScreenState extends State<GameScreen> {
       text = '';
     });
     if (done) {
-      showSnackbar(
-        context,
-        icon: Icons.thumb_up_rounded,
-        text: 'Лап хъсан я',
-      );
+      showSnackbar(context, Icons.thumb_up_rounded, context.lclz('good'));
     } else if (ended) {
-      showSnackbar(
-        context,
-        icon: Icons.lightbulb_rounded,
-        text: word.toUpperCase(),
-      );
+      showSnackbar(context, Icons.lightbulb_rounded, word.toUpperCase());
     }
   }
 
@@ -124,6 +119,19 @@ class GameScreenState extends State<GameScreen> {
     }
   }
 
+  void openScreen(Widget Function(BuildContext context) builder) {
+    final lcl = context.read<Map<String, String>>();
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Provider.value(
+          value: lcl,
+          builder: (context, _) => builder(context),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,27 +142,17 @@ class GameScreenState extends State<GameScreen> {
           icon: LanguageAvatar(widget.config.language),
         ),
         actions: [
-          // IconButton(
-          //   onPressed: () => Navigator.push<Language>(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => StatsScreen(game),
-          //     ),
-          //   ),
-          //   tooltip: 'Statistics',
-          //   icon: const Icon(
-          //     Icons.leaderboard_rounded,
-          //   ),
-          // ),
           IconButton(
-            onPressed: () => Navigator.push<void>(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HelpScreen(),
-              ),
+            onPressed: () => openScreen(
+              (context) => const HelpScreen(),
             ),
-            tooltip: 'Гъил гун',
             icon: const Icon(Icons.help_rounded),
+          ),
+          IconButton(
+            onPressed: () => openScreen(
+              (context) => SettingsScreen(game),
+            ),
+            icon: const Icon(Icons.settings_rounded),
           ),
           const SizedBox(width: 4),
         ],

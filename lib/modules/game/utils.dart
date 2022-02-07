@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:wordle/shared/models/game_config.dart';
 
 import 'screens/game.dart';
@@ -29,8 +30,9 @@ void startGame(BuildContext context, GameConfig config) {
   Navigator.pushReplacement<void, void>(
     context,
     MaterialPageRoute(
-      builder: (context) => GameScreen(
-        config: config,
+      builder: (context) => Provider.value(
+        value: config.localization,
+        builder: (context, _) => GameScreen(config: config),
       ),
     ),
   );
