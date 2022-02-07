@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/screens/languages.dart';
-import 'package:wordle/modules/game/services/save_progress.dart';
+import 'package:wordle/modules/game/services/progress_serivice.dart';
 import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/modules/settings/screens/settings.dart';
@@ -12,10 +12,10 @@ import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/models/language.dart';
-import 'package:wordle/shared/services/config_loader.dart';
 import 'package:wordle/shared/snackbar.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
 
+import '../services/config_service.dart';
 import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
 

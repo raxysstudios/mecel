@@ -4,9 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
-import 'package:wordle/modules/game/utils.dart';
+import 'package:wordle/modules/game/services/config_service.dart';
 import 'package:wordle/shared/models/game_config.dart';
-import 'package:wordle/shared/services/config_loader.dart';
 
 import 'modules/home/screens/splash.dart';
 

@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:wordle/modules/game/screens/game.dart';
+import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/services/language_assets.dart';
 import 'package:wordle/shared/utils.dart';
-
-import '../models/game_config.dart';
 
 const _localization = {
   'howTo': 'How to play?',
@@ -44,13 +45,28 @@ Future<GameConfig> loadConfig(String? languageName) async {
       .map((s) => s.characters.map((c) => InputKey(c)))
       .map((r) => r.toList())
       .toList();
-  final localization =
-      data['localization'] as Map<String, String>? ?? _localization;
+  final localization = data['localization'] == null
+      ? _localization
+      : Map.castFrom<String, dynamic, String, String>(
+          data['localization'] as Map<String, dynamic>,
+        );
 
   return GameConfig(
     language: language,
     words: words,
     layout: layout,
     localization: localization,
+  );
+}
+
+void startGame(BuildContext context, GameConfig config) {
+  Navigator.pushReplacement<void, void>(
+    context,
+    MaterialPageRoute(
+      builder: (context) => Provider.value(
+        value: config.localization,
+        builder: (context, _) => GameScreen(config: config),
+      ),
+    ),
   );
 }
