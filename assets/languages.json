@@ -12,12 +12,12 @@
     {
         "name": "iron",
         "nativeName": "ирон ӕвзаг",
-        "flag": "ossetia"
+        "flag": "ossetian"
     },
     {
         "name": "digor",
         "nativeName": "дигорон ӕвзаг",
-        "flag": "ossetia"
+        "flag": "ossetian"
     },
     {
         "name": "kumyk",
@@ -28,5 +28,25 @@
         "name": "aghul",
         "nativeName": "ağul ç‘al",
         "flag": "aghul"
+    },
+    {
+        "name": "west circassian",
+        "nativeName": "адыгабзэ",
+        "flag": "circassian"
+    },
+    {
+        "name": "east circassian",
+        "nativeName": "адыгэбзэ",
+        "flag": "circassian"
+    },
+    {
+        "name": "dargwa",
+        "nativeName": "дарган мез",
+        "flag": "dargwa"
+    },
+    {
+        "name": "avar",
+        "nativeName": "магӏарул мацӏ",
+        "flag": "avar"
     }
 ]
