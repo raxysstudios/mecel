@@ -61,17 +61,11 @@ class HelpScreen extends StatelessWidget {
             title: Text(context.lclz('guesses')),
           ),
           ListTile(
-            leading: const SizedBox(
-              height: double.infinity,
-              child: Icon(Icons.spellcheck_rounded),
-            ),
+            leading: const Icon(Icons.spellcheck_rounded),
             title: Text(context.lclz('letters')),
           ),
           ListTile(
-            leading: const SizedBox(
-              height: double.infinity,
-              child: Icon(Icons.palette_rounded),
-            ),
+            leading: const Icon(Icons.palette_rounded),
             title: Text(context.lclz('colors')),
           ),
           ListTile(
