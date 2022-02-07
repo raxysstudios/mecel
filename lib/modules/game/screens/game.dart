@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/screens/languages.dart';
+import 'package:wordle/modules/game/services/save_progress.dart';
 import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/modules/settings/screens/settings.dart';
@@ -35,7 +36,8 @@ class GameScreen extends StatefulWidget {
 class GameScreenState extends State<GameScreen> {
   late final word = getTodaysWord(widget.config.words);
   var text = '';
-  final attempts = <String>[];
+  var attempts = <String>[];
+
   bool get done => attempts.isNotEmpty && attempts.last == word;
   bool get ended => done || attempts.length >= widget.maxAttempts;
 
@@ -52,6 +54,25 @@ class GameScreenState extends State<GameScreen> {
   @override
   void initState() {
     super.initState();
+
+    restoreProgress(
+      widget.config.language.name,
+      getCurrentDay(),
+    ).then(
+      (p) {
+        if (p == null) {
+          saveProgress(
+            widget.config.language.name,
+            [],
+            getCurrentDay(),
+          );
+        } else {
+          setState(() {
+            attempts = p;
+          });
+        }
+      },
+    );
 
     layout = widget.config.layout;
     layout.last = [
@@ -84,6 +105,7 @@ class GameScreenState extends State<GameScreen> {
       attempts.add(text);
       text = '';
     });
+    saveProgress(widget.config.language.name, attempts);
     if (done) {
       showSnackbar(context, Icons.thumb_up_rounded, context.lclz('good'));
     } else if (ended) {
