@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/widgets/rounded_back_button.dart';
@@ -33,7 +34,8 @@ class SettingsScreen extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.schedule_rounded),
             title: Countdown(
-              builder: (context, string) => Text(string),
+              builder: (context, string) =>
+                  Text('#${getCurrentDay()} — $string'),
             ),
             subtitle: Text(context.lclz('coming')),
           ),

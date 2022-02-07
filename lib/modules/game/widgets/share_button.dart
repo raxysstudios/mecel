@@ -15,7 +15,7 @@ class ShareButton extends StatelessWidget {
   String getSharingText() {
     var text = 'mecel • '
         '${game.config.language.name}'
-        ' • ${getCurrentDay() + 1} '
+        ' • ${getCurrentDay()} '
         '${game.attempts.length}/${game.maxAttempts}\n';
 
     text = text.titleCase;
