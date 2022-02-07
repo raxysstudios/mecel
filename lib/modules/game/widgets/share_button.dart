@@ -13,10 +13,13 @@ class ShareButton extends StatelessWidget {
   final GameState game;
 
   String getSharingText() {
-    var text = 'Mecel • '
-        '${game.config.language.nativeName.titleCase}'
+    var text = 'mecel • '
+        '${game.config.language.name} — '
+        '${game.config.language.nativeName}'
         ' • ${getCurrentDay() + 1} '
         '${game.attempts.length}/${game.maxAttempts}\n';
+
+    text = text.titleCase;
 
     final word = game.word;
     for (final attempt in game.attempts) {
