@@ -128,7 +128,7 @@ class GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MECEL'),
+        title: const Text('Mecel'),
         leading: IconButton(
           onPressed: changeLanguage,
           icon: LanguageAvatar(widget.config.language),
