@@ -23,5 +23,10 @@
         "name": "kumyk",
         "nativeName": "къумукъ тил",
         "flag": "kumyk"
+    },
+    {
+        "name": "aghul",
+        "nativeName": "ağul ç‘al",
+        "flag": "aghul"
     }
 ]
