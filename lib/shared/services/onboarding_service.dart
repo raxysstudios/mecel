@@ -7,6 +7,6 @@ import 'package:wordle/shared/models/game_config.dart';
 Future<GameConfig> onboard(BuildContext context) async {
   final prefs = await SharedPreferences.getInstance();
   var language = prefs.getString('language');
-  language ??= await changeLanguage(context);
+  language ??= await changeLanguage(context, false);
   return await loadConfig(language);
 }

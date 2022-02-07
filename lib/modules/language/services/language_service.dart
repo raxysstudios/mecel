@@ -8,12 +8,15 @@ Future<String?> changeLanguage(
   BuildContext context, [
   bool canSkip = true,
 ]) async {
-  final route = MaterialPageRoute<Language>(
-    builder: (context) => const LanguagesScreen(),
+  final language = await Navigator.push(
+    context,
+    MaterialPageRoute<Language>(
+      builder: (context) => WillPopScope(
+        child: const LanguagesScreen(),
+        onWillPop: () async => canSkip,
+      ),
+    ),
   );
-  final language = canSkip
-      ? await Navigator.pushReplacement(context, route)
-      : await Navigator.push(context, route);
   if (language != null) {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('language', language.name);
