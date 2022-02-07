@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/services/config_service.dart';
 import 'package:wordle/modules/language/services/language_service.dart';
 import 'package:wordle/modules/onboarding/widgets/splash.dart';
@@ -28,7 +30,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     final prefs = await SharedPreferences.getInstance();
     var language = prefs.getString('language');
     language ??= await changeLanguage(context, false);
+
     config = await loadConfig(language);
+    await Future.wait<void>([
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) => Provider.value(
+            value: config,
+            builder: (context, _) => const HelpScreen(),
+          ),
+        ),
+      ),
+    ]);
   }
 
   @override
