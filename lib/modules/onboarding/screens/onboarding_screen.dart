@@ -29,20 +29,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Future<void> onboard() async {
     final prefs = await SharedPreferences.getInstance();
     var language = prefs.getString('language');
+    bool first = language == null;
     language ??= await changeLanguage(context, false);
 
     config = await loadConfig(language);
-    await Future.wait<void>([
-      Navigator.push(
-        context,
-        MaterialPageRoute<void>(
-          builder: (context) => Provider.value(
-            value: config!.localization,
-            builder: (context, _) => const HelpScreen(),
+    if (first) {
+      await Future.wait<void>([
+        Navigator.push(
+          context,
+          MaterialPageRoute<void>(
+            builder: (context) => Provider.value(
+              value: config!.localization,
+              builder: (context, _) => const HelpScreen(),
+            ),
           ),
         ),
-      ),
-    ]);
+      ]);
+    }
   }
 
   @override
