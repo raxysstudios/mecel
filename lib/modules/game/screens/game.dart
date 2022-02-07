@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/modules/game/screens/help.dart';
-import 'package:wordle/modules/game/screens/languages.dart';
 import 'package:wordle/modules/game/services/progress_serivice.dart';
 import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/modules/game/widgets/share_button.dart';
+import 'package:wordle/modules/language/services/language_service.dart';
 import 'package:wordle/modules/settings/screens/settings.dart';
 import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/models/input_key.dart';
-import 'package:wordle/shared/models/language.dart';
 import 'package:wordle/shared/snackbar.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
 
@@ -127,20 +125,6 @@ class GameScreenState extends State<GameScreen> {
     });
   }
 
-  void changeLanguage() async {
-    final language = await Navigator.push<Language>(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LanguagesScreen(),
-      ),
-    );
-    if (language != null) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('language', language.name);
-      startGame(context, await loadConfig(language.name));
-    }
-  }
-
   void openScreen(Widget Function(BuildContext context) builder) {
     final lcl = context.read<Map<String, String>>();
     Navigator.push<void>(
@@ -160,7 +144,13 @@ class GameScreenState extends State<GameScreen> {
       appBar: AppBar(
         title: const Text('Mecel'),
         leading: IconButton(
-          onPressed: changeLanguage,
+          onPressed: () async {
+            final language = await changeLanguage(context);
+            if (language != null) {
+              final config = await loadConfig(language);
+              startGame(context, config);
+            }
+          },
           icon: LanguageAvatar(widget.config.language),
         ),
         actions: [

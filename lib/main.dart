@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordle/config/dark_theme.dart';
 import 'package:wordle/config/light_theme.dart';
 import 'package:wordle/modules/game/services/config_service.dart';
 import 'package:wordle/shared/models/game_config.dart';
+import 'package:wordle/shared/services/onboarding_service.dart';
 
-import 'modules/home/screens/splash.dart';
+import 'shared/widgets/splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,13 +37,9 @@ class App extends StatelessWidget {
           darkTheme.textTheme,
         ),
       ),
-      home: SplashScreen<GameConfig>(
+      home: Splash<GameConfig>(
         title: 'MECEL',
-        future: SharedPreferences.getInstance().then(
-          (prefs) => loadConfig(
-            prefs.getString('language'),
-          ),
-        ),
+        future: onboard(context),
         onLoaded: startGame,
       ),
     );

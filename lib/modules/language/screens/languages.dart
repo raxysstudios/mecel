@@ -3,16 +3,11 @@ import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/models/language.dart';
 import 'package:wordle/shared/services/language_assets.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
-import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({
-    this.canSkip = true,
     Key? key,
   }) : super(key: key);
-
-  final bool canSkip;
-
   @override
   _LanguagesScreenState createState() => _LanguagesScreenState();
 }
@@ -31,44 +26,29 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
     );
   }
 
-  List<Language> filterLanguages() {
-    final text = textController.text;
-    return languages!
-        .where((l) => l.name.contains(text) || l.nativeName.contains(text))
-        .toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: widget.canSkip ? const RoundedBackButton() : null,
         title: const Text('Languages'),
-        // title: TextField(
-        //   controller: textController,
-        // ),
-        // actions: [
-        //   if (textController.text.isNotEmpty)
-        //     IconButton(
-        //       onPressed: () => textController.clear(),
-        //       icon: const Icon(Icons.clear_rounded),
-        //     ),
-        //   const SizedBox(width: 4),
-        // ],
       ),
       body: Builder(
         builder: (context) {
-          if (this.languages == null) {
+          if (languages == null) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: Padding(
+                padding: EdgeInsets.all(8),
+                child: SizedBox.square(
+                  dimension: 32,
+                  child: CircularProgressIndicator(),
+                ),
+              ),
             );
           }
-          final languages = filterLanguages();
           return ListView.builder(
-            itemCount: languages.length,
+            itemCount: languages!.length,
             itemBuilder: (context, i) {
-              final l = languages[i];
+              final l = languages![i];
               return ListTile(
                 leading: LanguageAvatar(l),
                 title: Text(l.name.titleCase),
