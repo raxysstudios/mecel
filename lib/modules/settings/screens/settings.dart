@@ -31,10 +31,7 @@ class SettingsScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 76),
         children: [
           ListTile(
-            leading: const SizedBox(
-              height: double.infinity,
-              child: Icon(Icons.schedule_rounded),
-            ),
+            leading: const Icon(Icons.schedule_rounded),
             title: Countdown(
               builder: (context, string) => Text(string),
             ),
@@ -42,10 +39,7 @@ class SettingsScreen extends StatelessWidget {
           ),
           ListTile(
             onTap: () => launch('https://github.com/alkaitagi/mecel'),
-            leading: const SizedBox(
-              height: double.infinity,
-              child: Icon(Icons.code_rounded),
-            ),
+            leading: const Icon(Icons.code_rounded),
             trailing: const Icon(Icons.launch_rounded),
             title: const Text('GitHub Repository'),
             subtitle: FutureBuilder<PackageInfo>(
@@ -61,6 +55,12 @@ class SettingsScreen extends StatelessWidget {
                 return Text(info);
               },
             ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.view_comfy_rounded),
+            onTap: () => launch('https://www.powerlanguage.co.uk/wordle/'),
+            title: const Text('Wordle'),
+            subtitle: const Text('The original game.'),
           ),
         ],
       ),
