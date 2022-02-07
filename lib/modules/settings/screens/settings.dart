@@ -57,9 +57,10 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.view_comfy_rounded),
             onTap: () => launch('https://www.powerlanguage.co.uk/wordle/'),
+            leading: const Icon(Icons.grid_view_rounded),
             title: const Text('Wordle'),
+            trailing: const Icon(Icons.launch_rounded),
             subtitle: const Text('The original game.'),
           ),
         ],
