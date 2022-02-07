@@ -18,10 +18,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   void initState() {
     super.initState();
-    Future.wait([
-      Future<void>.delayed(const Duration(seconds: 1)),
-      onboard(),
-    ]).then((_) => startGame(context, config!));
+    Future<void>.delayed(
+      const Duration(seconds: 1),
+      onboard,
+    ).then((_) => startGame(context, config!));
   }
 
   Future<void> onboard() async {
