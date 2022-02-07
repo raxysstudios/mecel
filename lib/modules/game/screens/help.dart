@@ -80,6 +80,10 @@ class HelpScreen extends StatelessWidget {
               'Гьар цӏарафдилай плиткадин ранг масакӏа жеда, гьикьван куь гиман патаг ятӏа чӏалаз.',
             ),
           ),
+          const ListTile(
+            leading: Icon(Icons.today_rounded),
+            title: Text('Цӏиий чӏал гьар юкъуз къведа.'),
+          ),
           ListTile(
             leading: const Icon(Icons.rule_rounded),
             title: Text(
@@ -107,10 +111,6 @@ class HelpScreen extends StatelessWidget {
             0,
             LetterState.missing,
             '"С" гьарф санани чӏала авач.',
-          ),
-          const ListTile(
-            leading: Icon(Icons.today_rounded),
-            title: Text('Цӏиий чӏал гьар юкъуз къведа.'),
           ),
         ],
       ),
