@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import 'package:wordle/modules/game/screens/game.dart';
+import 'package:wordle/modules/language/services/assets_service.dart';
 import 'package:wordle/shared/models/game_config.dart';
 import 'package:wordle/shared/models/input_key.dart';
-import 'package:wordle/shared/services/language_assets.dart';
 import 'package:wordle/shared/utils.dart';
 
 const _localization = {
