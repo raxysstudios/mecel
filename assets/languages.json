@@ -18,5 +18,11 @@
         "name": "digoron",
         "nativeName": "дигорон ӕвзаг",
         "flag": "ossetia"
+    },
+    
+    {
+        "name": "Kumyk",
+        "nativeName": "къумукъ тил",
+        "flag": "kumyk"
     }
 ]
