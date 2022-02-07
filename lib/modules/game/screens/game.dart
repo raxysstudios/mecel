@@ -33,7 +33,8 @@ class GameScreenState extends State<GameScreen> {
   late final word = getTodaysWord(widget.config.words);
   var text = '';
   final attempts = <String>[];
-  var done = false;
+  bool get done => attempts.isNotEmpty && attempts.last == text;
+  bool get ended => done || attempts.length >= widget.maxAttempts;
 
   late final InputLayout layout;
 
@@ -68,9 +69,7 @@ class GameScreenState extends State<GameScreen> {
   }
 
   void submit() {
-    if (done ||
-        text.length < word.length ||
-        attempts.length >= widget.maxAttempts) return;
+    if (text.length < word.length || ended) return;
     // if (!widget.config.words.contains(text)) {
     //   return showSnackbar(
     //     context,
@@ -80,7 +79,6 @@ class GameScreenState extends State<GameScreen> {
     // }
     setState(() {
       attempts.add(text);
-      done = text == word;
       text = '';
     });
     if (done) {
@@ -89,7 +87,7 @@ class GameScreenState extends State<GameScreen> {
         icon: Icons.thumb_up_rounded,
         text: 'Лап хъсан я',
       );
-    } else if (attempts.length >= widget.maxAttempts) {
+    } else if (ended) {
       showSnackbar(
         context,
         icon: Icons.lightbulb_rounded,
@@ -99,14 +97,14 @@ class GameScreenState extends State<GameScreen> {
   }
 
   void backspace() {
-    if (done || text.isEmpty) return;
+    if (ended || text.isEmpty) return;
     setState(() {
       text = text.substring(0, text.length - 1);
     });
   }
 
   void input(String char) {
-    if (done || text.length >= word.length) return;
+    if (ended || text.length >= word.length) return;
     setState(() {
       text += char;
     });
@@ -162,7 +160,7 @@ class GameScreenState extends State<GameScreen> {
         ],
       ),
       floatingActionButton: done ? ShareButton(game) : null,
-      bottomSheet: done
+      bottomSheet: ended
           ? null
           : SizedBox(
               height: 8 + 48.0 * layout.length,
@@ -181,12 +179,12 @@ class GameScreenState extends State<GameScreen> {
                 text: attempt,
                 check: word,
               ),
-            if (!done && attempts.length < widget.maxAttempts)
+            if (!ended)
               WordAttempt(
                 length: word.length,
                 text: text,
               ),
-            for (var i = attempts.length + (done ? 0 : 1);
+            for (var i = attempts.length + (ended ? 0 : 1);
                 i < widget.maxAttempts;
                 i++)
               WordAttempt(length: word.length),
