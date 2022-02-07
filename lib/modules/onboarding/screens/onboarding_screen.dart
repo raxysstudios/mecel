@@ -37,7 +37,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         context,
         MaterialPageRoute<void>(
           builder: (context) => Provider.value(
-            value: config,
+            value: config!.localization,
             builder: (context, _) => const HelpScreen(),
           ),
         ),
