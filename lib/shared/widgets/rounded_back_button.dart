@@ -12,7 +12,6 @@ class RoundedBackButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () => Navigator.maybePop(context),
-      tooltip: 'Back',
       icon: Icon(icon),
     );
   }
