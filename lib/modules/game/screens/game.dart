@@ -33,7 +33,7 @@ class GameScreenState extends State<GameScreen> {
   late final word = getTodaysWord(widget.config.words);
   var text = '';
   final attempts = <String>[];
-  bool get done => attempts.isNotEmpty && attempts.last == text;
+  bool get done => attempts.isNotEmpty && attempts.last == word;
   bool get ended => done || attempts.length >= widget.maxAttempts;
 
   late final InputLayout layout;
