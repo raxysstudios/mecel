@@ -56,7 +56,6 @@ Future<GameConfig> loadConfig(String? languageName) async {
     words: words,
     layout: layout,
     localization: localization,
-    filterig: words.length >= 200,
   );
 }
 
