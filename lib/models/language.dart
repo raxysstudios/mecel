@@ -13,7 +13,7 @@ class Language {
     return Language(
       name: json['name'] as String,
       nativeName: json['nativeName'] as String,
-      flag: json['flag'] as String,
+      flag: (json['flag'] ?? json['name']) as String,
     );
   }
 }

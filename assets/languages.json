@@ -1,13 +1,11 @@
 [
     {
         "name": "lezgi",
-        "nativeName": "лезги чӏал",
-        "flag": "lezgi"
+        "nativeName": "лезги чӏал"
     },
     {
         "name": "kaitag",
-        "nativeName": "хайдакьан кув",
-        "flag": "kaitag"
+        "nativeName": "хайдакьан кув"
     },
     {
         "name": "iron",
@@ -21,13 +19,11 @@
     },
     {
         "name": "kumyk",
-        "nativeName": "къумукъ тил",
-        "flag": "kumyk"
+        "nativeName": "къумукъ тил"
     },
     {
         "name": "aghul",
-        "nativeName": "ağul ç‘al",
-        "flag": "aghul"
+        "nativeName": "ağul ç‘al"
     },
     {
         "name": "east circassian",
@@ -36,12 +32,14 @@
     },
     {
         "name": "dargwa",
-        "nativeName": "дарган мез",
-        "flag": "dargwa"
+        "nativeName": "дарган мез"
     },
     {
         "name": "avar",
-        "nativeName": "магӏарул мацӏ",
-        "flag": "avar"
+        "nativeName": "магӏарул мацӏ"
+    },
+    {
+        "name": "abkhaz",
+        "nativeName": "аҧсуа бызшәа"
     }
 ]
