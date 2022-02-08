@@ -35,7 +35,7 @@ class SettingsScreen extends StatelessWidget {
             leading: const Icon(Icons.schedule_rounded),
             title: Countdown(
               builder: (context, string) =>
-                  Text('#${getCurrentDay()} — $string'),
+                  Text('№${getCurrentDay()} — $string'),
             ),
             subtitle: Text(context.lclz('coming')),
           ),
