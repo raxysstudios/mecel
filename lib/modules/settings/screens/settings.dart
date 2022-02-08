@@ -61,7 +61,7 @@ class SettingsScreen extends StatelessWidget {
           ListTile(
             onTap: () => launch('https://www.powerlanguage.co.uk/mecel/'),
             leading: const Icon(Icons.grid_view_rounded),
-            title: const Text('mecel'),
+            title: const Text('Wordle'),
             trailing: const Icon(Icons.launch_rounded),
             subtitle: const Text('The original game.'),
           ),
