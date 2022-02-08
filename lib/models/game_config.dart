@@ -6,9 +6,7 @@ class GameConfig {
   final InputLayout layout;
   final Set<String> words;
   final Map<String, String> localization;
-
   final int maxAttempts;
-  final bool filterig;
 
   GameConfig({
     required this.language,
@@ -16,6 +14,5 @@ class GameConfig {
     required this.words,
     required this.localization,
     this.maxAttempts = 6,
-    this.filterig = true,
   });
 }

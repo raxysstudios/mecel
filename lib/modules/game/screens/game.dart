@@ -92,7 +92,7 @@ class GameScreenState extends State<GameScreen> {
 
   void submit() {
     if (text.length < word.length || ended) return;
-    if (config.filterig && !config.words.contains(text)) {
+    if (!config.words.contains(text)) {
       return showSnackbar(
         context,
         Icons.search_off_rounded,
