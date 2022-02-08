@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/models/language.dart';
 
 import '../screens/languages.dart';
 

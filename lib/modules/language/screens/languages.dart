@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wordle/models/language.dart';
 import 'package:wordle/modules/language/services/assets_service.dart';
 import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/models/language.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
 
 class LanguagesScreen extends StatefulWidget {

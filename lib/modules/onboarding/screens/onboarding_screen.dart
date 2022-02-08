@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wordle/models/game_config.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/services/config_service.dart';
 import 'package:wordle/modules/language/services/language_service.dart';
 import 'package:wordle/modules/onboarding/widgets/splash.dart';
-import 'package:wordle/shared/models/game_config.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);

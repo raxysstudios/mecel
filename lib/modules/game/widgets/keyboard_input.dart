@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/models/input_key.dart';
+import '../../../models/input_key.dart';
 
 class KeyboardInput extends StatelessWidget {
   const KeyboardInput({

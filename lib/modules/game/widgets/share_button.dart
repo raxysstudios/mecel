@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:wordle/models/game_state.dart';
 import 'package:wordle/modules/game/utils.dart';
 import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/models/game_state.dart';
 import 'package:wordle/shared/snackbar.dart';
 
 class ShareButton extends StatelessWidget {

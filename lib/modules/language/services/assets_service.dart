@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:wordle/shared/models/language.dart';
+import 'package:wordle/models/language.dart';
 import 'package:wordle/shared/utils.dart';
 
 Future<List<Language>> loadLanguages({bool sort = false}) async {

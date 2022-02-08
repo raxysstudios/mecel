@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wordle/models/game_config.dart';
+import 'package:wordle/models/game_state.dart';
+import 'package:wordle/models/input_key.dart';
 import 'package:wordle/modules/game/screens/help.dart';
 import 'package:wordle/modules/game/services/progress_serivice.dart';
 import 'package:wordle/modules/game/utils.dart';
@@ -7,9 +10,6 @@ import 'package:wordle/modules/game/widgets/share_button.dart';
 import 'package:wordle/modules/language/services/language_service.dart';
 import 'package:wordle/modules/settings/screens/settings.dart';
 import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/models/game_config.dart';
-import 'package:wordle/shared/models/game_state.dart';
-import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/snackbar.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
 
@@ -18,33 +18,33 @@ import '../widgets/keyboard_input.dart';
 import '../widgets/word_attempt.dart';
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({
-    required this.config,
-    this.maxAttempts = 6,
+  const GameScreen(
+    this.config, {
     Key? key,
   }) : super(key: key);
 
   final GameConfig config;
-  final int maxAttempts;
 
   @override
   GameScreenState createState() => GameScreenState();
 }
 
 class GameScreenState extends State<GameScreen> {
-  late final word = getTodaysWord(widget.config.words);
+  GameConfig get config => widget.config;
+
+  late final word = getTodaysWord(config.words);
   var text = '';
   var attempts = <String>[];
 
   bool get done => attempts.isNotEmpty && attempts.last == word;
-  bool get ended => done || attempts.length >= widget.maxAttempts;
+  bool get ended => done || attempts.length >= config.maxAttempts;
 
   late final InputLayout layout;
 
   GameState get game => GameState(
-        config: widget.config,
+        config: config,
         attempts: attempts,
-        maxAttempts: widget.maxAttempts,
+        maxAttempts: config.maxAttempts,
         word: word,
         done: done,
       );
@@ -54,13 +54,13 @@ class GameScreenState extends State<GameScreen> {
     super.initState();
 
     restoreProgress(
-      widget.config.language.name,
+      config.language.name,
       getCurrentDay(),
     ).then(
       (p) {
         if (p == null) {
           saveProgress(
-            widget.config.language.name,
+            config.language.name,
             [],
             getCurrentDay(),
           );
@@ -72,7 +72,7 @@ class GameScreenState extends State<GameScreen> {
       },
     );
 
-    layout = widget.config.layout;
+    layout = config.layout;
     layout.last = [
       InputKey(
         null,
@@ -92,18 +92,18 @@ class GameScreenState extends State<GameScreen> {
 
   void submit() {
     if (text.length < word.length || ended) return;
-    // if (!widget.config.words.contains(text)) {
-    //   return showSnackbar(
-    //     context,
-    //     icon: Icons.search_off_rounded,
-    //     text: 'Unknown word',
-    //   );
-    // }
+    if (config.filterig && !config.words.contains(text)) {
+      return showSnackbar(
+        context,
+        Icons.search_off_rounded,
+        context.lclz('unknown'),
+      );
+    }
     setState(() {
       attempts.add(text);
       text = '';
     });
-    saveProgress(widget.config.language.name, attempts);
+    saveProgress(config.language.name, attempts);
     if (done) {
       showSnackbar(context, Icons.thumb_up_rounded, context.lclz('good'));
     } else if (ended) {
@@ -151,7 +151,7 @@ class GameScreenState extends State<GameScreen> {
               startGame(context, config);
             }
           },
-          icon: LanguageAvatar(widget.config.language),
+          icon: LanguageAvatar(config.language),
         ),
         actions: [
           IconButton(
@@ -195,7 +195,7 @@ class GameScreenState extends State<GameScreen> {
                 text: text,
               ),
             for (var i = attempts.length + (ended ? 0 : 1);
-                i < widget.maxAttempts;
+                i < config.maxAttempts;
                 i++)
               WordAttempt(length: word.length),
           ],

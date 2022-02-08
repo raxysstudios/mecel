@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
+import 'package:wordle/models/game_config.dart';
+import 'package:wordle/models/input_key.dart';
 import 'package:wordle/modules/game/screens/game.dart';
 import 'package:wordle/modules/language/services/assets_service.dart';
-import 'package:wordle/shared/models/game_config.dart';
-import 'package:wordle/shared/models/input_key.dart';
 import 'package:wordle/shared/utils.dart';
 
 const _localization = {
@@ -57,6 +56,7 @@ Future<GameConfig> loadConfig(String? languageName) async {
     words: words,
     layout: layout,
     localization: localization,
+    filterig: words.length >= 200,
   );
 }
 
@@ -66,7 +66,7 @@ void startGame(BuildContext context, GameConfig config) {
     MaterialPageRoute(
       builder: (context) => Provider.value(
         value: config.localization,
-        builder: (context, _) => GameScreen(config: config),
+        builder: (context, _) => GameScreen(config),
       ),
     ),
   );
