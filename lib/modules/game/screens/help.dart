@@ -14,6 +14,7 @@ class HelpScreen extends StatelessWidget {
     String caption,
   ) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           height: 64,
@@ -28,10 +29,11 @@ class HelpScreen extends StatelessWidget {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Text(caption),
-        ),
+        ListTile(
+          dense: true,
+          leading: const SizedBox(),
+          title: Text(caption),
+        )
       ],
     );
   }
