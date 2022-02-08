@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mecel/models/game_config.dart';
+import 'package:mecel/models/input_key.dart';
+import 'package:mecel/modules/game/screens/game.dart';
+import 'package:mecel/modules/language/services/assets_service.dart';
+import 'package:mecel/shared/utils.dart';
 import 'package:provider/provider.dart';
-import 'package:wordle/models/game_config.dart';
-import 'package:wordle/models/input_key.dart';
-import 'package:wordle/modules/game/screens/game.dart';
-import 'package:wordle/modules/language/services/assets_service.dart';
-import 'package:wordle/shared/utils.dart';
 
 const _localization = {
   'howTo': 'How to play?',

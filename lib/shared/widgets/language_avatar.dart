@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/models/language.dart';
+import 'package:mecel/models/language.dart';
 
 class LanguageAvatar extends StatelessWidget {
   const LanguageAvatar(

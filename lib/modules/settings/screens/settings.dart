@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mecel/models/game_state.dart';
+import 'package:mecel/modules/game/utils.dart';
+import 'package:mecel/shared/extensions.dart';
+import 'package:mecel/shared/widgets/rounded_back_button.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wordle/models/game_state.dart';
-import 'package:wordle/modules/game/utils.dart';
-import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 import '../widgets/countdown.dart';
 
@@ -59,9 +59,9 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () => launch('https://www.powerlanguage.co.uk/wordle/'),
+            onTap: () => launch('https://www.powerlanguage.co.uk/mecel/'),
             leading: const Icon(Icons.grid_view_rounded),
-            title: const Text('Wordle'),
+            title: const Text('mecel'),
             trailing: const Icon(Icons.launch_rounded),
             subtitle: const Text('The original game.'),
           ),

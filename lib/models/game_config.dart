@@ -1,5 +1,5 @@
-import 'package:wordle/models/input_key.dart';
-import 'package:wordle/models/language.dart';
+import 'package:mecel/models/input_key.dart';
+import 'package:mecel/models/language.dart';
 
 class GameConfig {
   final Language language;

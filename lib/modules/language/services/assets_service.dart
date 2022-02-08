@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:wordle/models/language.dart';
-import 'package:wordle/shared/utils.dart';
+import 'package:mecel/models/language.dart';
+import 'package:mecel/shared/utils.dart';
 
 Future<List<Language>> loadLanguages({bool sort = false}) async {
   final data = await rootBundle

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/shared/widgets/raxys.dart';
+import 'package:mecel/shared/widgets/raxys.dart';
 
 class Splash extends StatelessWidget {
   const Splash(

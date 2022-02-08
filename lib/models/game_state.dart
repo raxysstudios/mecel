@@ -1,4 +1,4 @@
-import 'package:wordle/models/game_config.dart';
+import 'package:mecel/models/game_config.dart';
 
 class GameState {
   late GameConfig config;

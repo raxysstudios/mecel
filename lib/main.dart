@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wordle/config/dark_theme.dart';
-import 'package:wordle/config/light_theme.dart';
-import 'package:wordle/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:mecel/config/dark_theme.dart';
+import 'package:mecel/config/light_theme.dart';
+import 'package:mecel/modules/onboarding/screens/onboarding_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

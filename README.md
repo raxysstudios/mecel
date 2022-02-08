@@ -1,4 +1,4 @@
-# wordle
+# mecel
 
 A new Flutter project.
 

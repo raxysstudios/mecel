@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/models/language.dart';
-import 'package:wordle/modules/language/services/assets_service.dart';
-import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/widgets/language_avatar.dart';
-import 'package:wordle/shared/widgets/rounded_back_button.dart';
+import 'package:mecel/models/language.dart';
+import 'package:mecel/modules/language/services/assets_service.dart';
+import 'package:mecel/shared/extensions.dart';
+import 'package:mecel/shared/widgets/language_avatar.dart';
+import 'package:mecel/shared/widgets/rounded_back_button.dart';
 
 class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({Key? key}) : super(key: key);

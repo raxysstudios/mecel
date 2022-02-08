@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wordle/shared/extensions.dart';
-import 'package:wordle/shared/widgets/letter_card.dart';
-import 'package:wordle/shared/widgets/raxys.dart';
+import 'package:mecel/shared/extensions.dart';
+import 'package:mecel/shared/widgets/letter_card.dart';
+import 'package:mecel/shared/widgets/raxys.dart';
 
 class HelpScreen extends StatelessWidget {
   const HelpScreen({Key? key}) : super(key: key);

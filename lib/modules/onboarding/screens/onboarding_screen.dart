@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mecel/models/game_config.dart';
+import 'package:mecel/modules/game/screens/help.dart';
+import 'package:mecel/modules/game/services/config_service.dart';
+import 'package:mecel/modules/language/services/language_service.dart';
+import 'package:mecel/modules/onboarding/widgets/splash.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wordle/models/game_config.dart';
-import 'package:wordle/modules/game/screens/help.dart';
-import 'package:wordle/modules/game/services/config_service.dart';
-import 'package:wordle/modules/language/services/language_service.dart';
-import 'package:wordle/modules/onboarding/widgets/splash.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
