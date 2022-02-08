@@ -3,6 +3,7 @@ import 'package:wordle/models/language.dart';
 import 'package:wordle/modules/language/services/assets_service.dart';
 import 'package:wordle/shared/extensions.dart';
 import 'package:wordle/shared/widgets/language_avatar.dart';
+import 'package:wordle/shared/widgets/rounded_back_button.dart';
 
 class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({Key? key}) : super(key: key);
@@ -28,6 +29,7 @@ class _LanguagesScreenState extends State<LanguagesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const RoundedBackButton(),
         title: const Text('Languages'),
       ),
       body: Builder(
