@@ -10,8 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2 # Only works with v2
-      - uses: subosito/flutter-action@v1
       - run: |
-          mkdir build/web
+          mkdir -p build/web
           echo "mecel.raxys.app" > build/web/CNAME.txt
+      - uses: subosito/flutter-action@v1
       - uses: erickzanardo/flutter-gh-pages@v6
