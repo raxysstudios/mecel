@@ -11,5 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2 # Only works with v2
       - uses: subosito/flutter-action@v1
+      - run: |
+          mkdir build/web
+          echo "mecel.raxys.app" > build/web/CNAME.txt
       - uses: erickzanardo/flutter-gh-pages@v6
-      - run: echo "mecel.raxys.app" > build/web/CNAME.txt
