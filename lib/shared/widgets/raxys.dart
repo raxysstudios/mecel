@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class RaxysLogo extends StatelessWidget {
-  const RaxysLogo({
+class Raxys extends StatelessWidget {
+  const Raxys({
     this.size = 24,
-    this.opacity = 1,
-    this.scale = 1,
+    this.opacity = .1,
+    this.scale = 7,
     Key? key,
   }) : super(key: key);
 
@@ -20,12 +20,18 @@ class RaxysLogo extends StatelessWidget {
         scale: scale,
         child: Opacity(
           opacity: opacity,
-          child: Image.asset(
-            Theme.of(context).brightness == Brightness.dark
-                ? 'assets/raxys_dark.png'
-                : 'assets/raxys_light.png',
-            isAntiAlias: true,
-            filterQuality: FilterQuality.high,
+          child: ColorFiltered(
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+              BlendMode.modulate,
+            ),
+            child: Image.asset(
+              'assets/raxys.png',
+              isAntiAlias: true,
+              filterQuality: FilterQuality.high,
+            ),
           ),
         ),
       ),

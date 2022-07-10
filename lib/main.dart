@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mecel/config/dark_theme.dart';
 import 'package:mecel/config/light_theme.dart';
-import 'package:mecel/modules/onboarding/screens/onboarding_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'modules/game/screens/help.dart';
+import 'modules/game/services/config_service.dart';
+import 'modules/language/services/language_service.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,8 +19,40 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) async {
+        var language = await SharedPreferences.getInstance()
+            .then((p) => p.getString('language'));
+        bool first = language == null;
+        language ??= await changeLanguage(context, false);
+
+        final config = await loadConfig(language);
+        if (first) {
+          await Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (context) => Provider.value(
+                value: config.localization,
+                builder: (context, _) => const HelpScreen(),
+              ),
+            ),
+          );
+        }
+        startGame(context, config);
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +71,6 @@ class App extends StatelessWidget {
           darkTheme.textTheme,
         ),
       ),
-      home: const OnboardingScreen(),
     );
   }
 }

@@ -42,12 +42,7 @@ class HelpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Stack(
-          alignment: Alignment.center,
-          children: const [
-            RaxysLogo(opacity: .1, scale: 7),
-          ],
-        ),
+        leading: const Raxys(),
         title: Text(context.lclz('howTo')),
       ),
       floatingActionButton: FloatingActionButton.extended(
