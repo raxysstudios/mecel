@@ -9,7 +9,7 @@ class LanguagesScreen extends StatefulWidget {
   const LanguagesScreen({Key? key}) : super(key: key);
 
   @override
-  _LanguagesScreenState createState() => _LanguagesScreenState();
+  State<LanguagesScreen> createState() => _LanguagesScreenState();
 }
 
 class _LanguagesScreenState extends State<LanguagesScreen> {
