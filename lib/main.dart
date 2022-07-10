@@ -19,40 +19,8 @@ void main() {
   runApp(const App());
 }
 
-class App extends StatefulWidget {
+class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) async {
-        var language = await SharedPreferences.getInstance()
-            .then((p) => p.getString('language'));
-        bool first = language == null;
-        language ??= await changeLanguage(context, false);
-
-        final config = await loadConfig(language);
-        if (first) {
-          await Navigator.push(
-            context,
-            MaterialPageRoute<void>(
-              builder: (context) => Provider.value(
-                value: config.localization,
-                builder: (context, _) => const HelpScreen(),
-              ),
-            ),
-          );
-        }
-        startGame(context, config);
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +38,35 @@ class _AppState extends State<App> {
         textTheme: GoogleFonts.robotoSlabTextTheme(
           darkTheme.textTheme,
         ),
+      ),
+      home: FutureBuilder<String?>(
+        future: SharedPreferences.getInstance()
+            .then((p) => p.getString('language')),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            SchedulerBinding.instance.addPostFrameCallback(
+              (_) async {
+                var language = snapshot.data;
+                final first = language == null;
+                language ??= await changeLanguage(context, false);
+                final config = await loadConfig(language);
+                if (first) {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (context) => Provider.value(
+                        value: config.localization,
+                        builder: (context, _) => const HelpScreen(),
+                      ),
+                    ),
+                  );
+                }
+                startGame(context, config);
+              },
+            );
+          }
+          return const Material();
+        },
       ),
     );
   }
